@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: miroplug/miroplug
+  name: miroplug/miroplug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: miroplug/miroplug
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: miroplug/miroplug
+    spec:
+      containers:
+      - image: miroplug/miroplug
+        name: miroplug
+        resources: {}
+status: {}
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: miroplug
+  name: miroplug
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: miroplug
+  type: ClusterIP
+status:
+  loadBalancer: {}
