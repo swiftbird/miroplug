@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>swiftbird.us</groupId>
 	<artifactId>miroplug</artifactId>
-	<version>1.0</version>
+	<version>1.2.21</version>
 	<name>miroplug</name>
 	<description>SpringBoot Miro Plugin</description>
 	<properties>
