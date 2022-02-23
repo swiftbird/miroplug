@@ -33,7 +33,52 @@ function drawTemplate(labels) {
             widgets.push(getShape(colX, rowY, rowColor))
         }
     }
+    console.log(widgets)
     miro.board.widgets.create(widgets)
+}
+
+function drawSnap() {
+    const snapWidgets = [
+        {
+            "type": "shape",
+            "x": 0,
+            "y": 0,
+            "width": 3000,
+            "height": 4500,
+            "style": {
+                "borderWidth": 1,
+                "backgroundColor": "#ffffff"
+            }
+        },
+        {
+            "type": "shape",
+            "text": "<p><strong><u>Donkey</u></strong></p>",
+            "x": 4000,
+            "y": 0,
+            "width": 3000,
+            "height": 4500,
+
+            "style": {
+                "backgroundColor": "#ffffff",
+                "backgroundOpacity": 1,
+                "bold": 0,
+                "borderColor": "#1a1a1a",
+                "borderOpacity": 1,
+                "borderStyle": 2,
+                "borderWidth": 1,
+                "fontFamily": 0,
+                "fontSize": 144,
+                "highlighting": 0,
+                "shapeType": 3,
+                "textAlign": "c",
+                "textAlignVertical": "t",
+                "textColor": "#1a1a1a"
+            }
+        }
+    ]
+
+    console.log(snapWidgets)
+    miro.board.widgets.create(snapWidgets)
 }
 
 function getShape(x, y, color) {

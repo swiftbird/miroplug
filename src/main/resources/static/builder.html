@@ -10,6 +10,8 @@
     <button id="addRow" class="add-row-button" onclick="addRowInput('')">Add Row</button>
     <div id="rows"></div>
     <button id="submit" class="build-button">Build template</button>
+
+    <button id="snap" class="build-button">Snap</button>
 </div>
 <script src="https://miro.com/app/static/sdk.1.1.js"></script>
 <script src="src/builder.js"></script>
@@ -22,6 +24,7 @@
     addRowInput('MARKETING')
 
     document.getElementById('submit').addEventListener('click', () => drawTemplate(getLabels()))
+    document.getElementById('snap').addEventListener('click', () => drawSnap())
 
     function addRowInput(value) {
         const row = document.createElement('div')
