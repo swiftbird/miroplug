@@ -3,6 +3,60 @@
 <head>
     <title></title>
     <link rel="stylesheet" href="src/styles.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: center;
+            padding-top: 32px;
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            padding-left: 32px;
+            margin-bottom: 32px;
+        }
+
+        .draggable-item {
+            margin-left: 32px;
+            margin-bottom: 32px;
+            width: 112px;
+            height: 112px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 18px;
+            font-family: sans-serif;
+        }
+
+        .draggable-item.red {
+            background-color: #f24726;
+        }
+
+        .draggable-item.green {
+            background-color: #0ca788;
+        }
+
+        .image-box img {
+            max-width: 112px;
+            max-height: 112px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -12,6 +66,7 @@
     <button id="submit" class="build-button">Build template</button>
 
     <button id="snap" class="build-button">Snap</button>
+    <div class="shape draggable-item green" data-color="0ca788">I am shape</div><div class="shape draggable-item red" data-color="f24726">Me too</div>
 </div>
 <script src="https://miro.com/app/static/sdk.1.1.js"></script>
 <script src="src/builder.js"></script>

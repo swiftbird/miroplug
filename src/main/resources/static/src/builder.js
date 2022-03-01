@@ -57,6 +57,11 @@ function drawSnap() {
             "y": 0,
             "width": 3000,
             "height": 4500,
+            "metadata": {
+                "3458764519010334012": {
+                    "graphId": "123456789"
+                }
+            },
 
             "style": {
                 "backgroundColor": "#ffffff",
