@@ -21,62 +21,6 @@ function createShape(canvasX, canvasY, color, text) {
     })
 }
 
-function createSnapold(canvasX, canvasY, color, text) {
-    return miro.board.widgets.create(
-        //     {
-        //     type: 'shape',
-        //     text: text,
-        //     x: canvasX,
-        //     y: canvasY,
-        //     style: {
-        //         textColor: '#fff',
-        //         backgroundColor: '#' + color,
-        //         borderColor: 'transparent',
-        //     },
-        // }
-        [
-            {
-                "type": "frame",
-                "x": 0,
-                "y": 0,
-                "width": 3100,
-                "height": 4600,
-                "style": {
-                    "borderWidth": 1,
-                    "backgroundColor": "#ffffff"
-                }
-            },
-            {
-                // "type": "shape",
-                "text": "<p><strong><u>Donkey</u></strong></p>",
-                // "x": 4000,
-                "x": canvasX,
-                // "y": 0,
-                "y": canvasY,
-                "width": 3000,
-                "height": 4500,
-
-                "style": {
-                    "backgroundColor": "#ffffff",
-                    "backgroundOpacity": 1,
-                    "bold": 0,
-                    "borderColor": "#1a1a1a",
-                    "borderOpacity": 1,
-                    "borderStyle": 2,
-                    "borderWidth": 1,
-                    "fontFamily": 0,
-                    "fontSize": 144,
-                    "highlighting": 0,
-                    "shapeType": 3,
-                    "textAlign": "c",
-                    "textAlignVertical": "t",
-                    "textColor": "#1a1a1a"
-                },
-                "type": "shape"
-
-            }
-        ])
-}
 
 function getSnapForm(canvasX, canvasY) {
     return [
@@ -95,7 +39,7 @@ function getSnapForm(canvasX, canvasY) {
             },
 
         },
-   
+
         // Title Bar
         {
 
