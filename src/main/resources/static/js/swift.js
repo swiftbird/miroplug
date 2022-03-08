@@ -434,6 +434,21 @@ function createFullSnap(canvasX, canvasY) {
 
         ]
     )
+
+    miro.board.widgets.create(
+
+        {
+            "type": "embed",
+            "x": 0 + canvasX,
+            "y": 0 + canvasY,
+            "scale": 3,
+            "title": "I like Cheese",
+
+            "html": "https://www.youtube.com/watch?v=MXN1gnoSYqw&ab_channel=ShaunAnderson"
+
+        }
+    )
+
     return miro.board.widgets.create(
         getSnapForm(canvasX, canvasY)
     )
@@ -526,6 +541,7 @@ function bootstrap() {
             console.log('Dropped full snap')
             // createShape(canvasX, canvasY, currentShapeColor, currentShapeText)
             createFullSnap(canvasX, canvasY)
+
 
         },
     }
