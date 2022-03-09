@@ -91,6 +91,7 @@ function getSnapForm(canvasX, canvasY) {
             "rotation": 0.0,
             "type": "text",
 
+
         },
         // Data
         {
@@ -264,6 +265,12 @@ function getSnapForm(canvasX, canvasY) {
             "height": 228.0,
             "scale": 1.07,
             "type": "sticker",
+            "metadata": {
+                "3458764519010334012": {
+                    "swifttype": "API",
+                    "donkey": "Llama"
+                }
+            }
 
         },
         // Data Sticker
