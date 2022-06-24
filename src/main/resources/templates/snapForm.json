@@ -1,0 +1,315 @@
+[
+  {
+    "type": "frame",
+    "metadata": {
+      "3458764523130768268": {
+        "swifttype": "API",
+        "donkey": "Llama"
+      }
+    },
+    "x": 0.0,
+    "y": 0.0,
+    "width": 3100.0,
+    "height": 4600.0,
+    "style": {
+      "backgroundColor": "#ffffff",
+      "borderWidth": 1
+    }
+  },
+  {
+    "style": {
+      "backgroundOpacity": 1.0,
+      "backgroundColor": "#94bfea",
+      "borderColor": "#1a1a1a",
+      "borderStyle": 2,
+      "borderOpacity": 1.0,
+      "borderWidth": 1.0,
+      "fontSize": 144,
+      "fontFamily": 0,
+      "textColor": "#ffffff",
+      "textAlign": "c",
+      "textAlignVertical": "m",
+      "shapeType": 3
+    },
+    "text": "<p><strong style=\"color:rgb(255,255,255)\">Service Name</strong></p>",
+    "x": 0.0,
+    "y": -2050,
+    "width": 3000.0,
+    "height": 407.937138671738,
+    "rotation": 0.0,
+    "type": "shape"
+  },
+  {
+    "style": {
+      "padding": 0,
+      "backgroundOpacity": 1.0,
+      "backgroundColor": "#ffffffff",
+      "borderColor": "#ffffffff",
+      "borderStyle": 2,
+      "borderOpacity": 1.0,
+      "borderWidth": 0.0,
+      "fontSize": 144,
+      "fontFamily": 0,
+      "textColor": "#1a1a1a",
+      "textAlign": "c",
+      "shapeType": "text_rect"
+    },
+    "text": "<p>APIs</p>",
+    "x": -1000,
+    "y": -1500,
+    "width": 30,
+    "scale": 10.2857142857143,
+    "rotation": 0.0,
+    "type": "text"
+  },
+  {
+    "style": {
+      "padding": 0,
+      "backgroundOpacity": 1.0,
+      "backgroundColor": "#ffffffff",
+      "borderColor": "#ffffffff",
+      "borderStyle": 2,
+      "borderOpacity": 1.0,
+      "borderWidth": 0.0,
+      "fontSize": 144,
+      "fontFamily": 0,
+      "textColor": "#1a1a1a",
+      "textAlign": "c",
+      "shapeType": "text_rect"
+    },
+    "text": "<p>Data</p>",
+    "x": 800,
+    "y": -1500,
+    "width": 35,
+    "scale": 10.2857142857143,
+    "rotation": 0.0,
+    "type": "text"
+  },
+  {
+    "style": {
+      "padding": 0,
+      "backgroundOpacity": 1.0,
+      "backgroundColor": "#ffffffff",
+      "borderColor": "#ffffffff",
+      "borderStyle": 2,
+      "borderOpacity": 1.0,
+      "borderWidth": 0.0,
+      "fontSize": 144,
+      "fontFamily": 0,
+      "textColor": "#1a1a1a",
+      "textAlign": "c",
+      "shapeType": "text_rect"
+    },
+    "text": "<p>Pub</p>",
+    "x": -1206.74081978741,
+    "y": -215,
+    "width": 30,
+    "scale": 10.2857142857143,
+    "rotation": 0.0,
+    "type": "text"
+  },
+  {
+    "style": {
+      "padding": 0,
+      "backgroundOpacity": 1.0,
+      "backgroundColor": "#ffffffff",
+      "borderColor": "#ffffffff",
+      "borderStyle": 2,
+      "borderOpacity": 1.0,
+      "borderWidth": 0.0,
+      "fontSize": 144,
+      "fontFamily": 0,
+      "textColor": "#1a1a1a",
+      "textAlign": "c",
+      "shapeType": "text_rect"
+    },
+    "text": "<p>Sub</p>",
+    "x": -526.440096948559,
+    "y": -215,
+    "width": 30,
+    "scale": 10.2857142857143,
+    "rotation": 0.0,
+    "type": "text"
+  },
+  {
+    "style": {
+      "padding": 0,
+      "backgroundOpacity": 1.0,
+      "backgroundColor": "#ffffffff",
+      "borderColor": "#ffffffff",
+      "borderStyle": 2,
+      "borderOpacity": 1.0,
+      "borderWidth": 0.0,
+      "fontSize": 144,
+      "fontFamily": 0,
+      "textColor": "#1a1a1a",
+      "textAlign": "c",
+      "shapeType": "text_rect"
+    },
+    "text": "<p>External</p>",
+    "x": 800,
+    "y": -215,
+    "width": 55,
+    "scale": 10.2857142857143,
+    "rotation": 0.0,
+    "type": "text"
+  },
+  {
+    "style": {
+      "padding": 0,
+      "backgroundOpacity": 1.0,
+      "backgroundColor": "#ffffffff",
+      "borderColor": "#ffffffff",
+      "borderStyle": 2,
+      "borderOpacity": 1.0,
+      "borderWidth": 0.0,
+      "fontSize": 144,
+      "fontFamily": 0,
+      "textColor": "#1a1a1a",
+      "textAlign": "c",
+      "shapeType": "text_rect"
+    },
+    "text": "<p>Stories / Logic</p>",
+    "x": -940,
+    "y": 1330,
+    "width": 100,
+    "scale": 10.2857142857143,
+    "rotation": 0.0,
+    "type": "text"
+  },
+  {
+    "style": {
+      "padding": 0,
+      "backgroundOpacity": 1.0,
+      "backgroundColor": "#ffffffff",
+      "borderColor": "#ffffffff",
+      "borderStyle": 2,
+      "borderOpacity": 1.0,
+      "borderWidth": 0.0,
+      "fontSize": 144,
+      "fontFamily": 0,
+      "textColor": "#1a1a1a",
+      "textAlign": "c",
+      "shapeType": "text_rect"
+    },
+    "text": "<p>UI</p>",
+    "x": 800,
+    "y": 1330,
+    "width": 7.52,
+    "scale": 10.2857142857143,
+    "rotation": 0.0,
+    "type": "text"
+  },
+  {
+    "style": {
+      "backgroundColor": "#f5d128",
+      "fontSize": 0,
+      "fontFamily": 0,
+      "textAlign": "c",
+      "textAlignVertical": "m"
+    },
+    "text": "<p><br /></p>",
+    "x": -1233,
+    "y": -1200,
+    "width": 199.0,
+    "height": 228.0,
+    "scale": 1.07,
+    "type": "sticker"
+  },
+  {
+    "style": {
+      "stickerBackgroundColor": "#a6ccf5",
+      "fontSize": 0,
+      "fontFamily": 0,
+      "textAlign": "c",
+      "textAlignVertical": "m"
+    },
+    "text": "",
+    "x": 1053,
+    "y": -1200,
+    "width": 199.0,
+    "height": 228.0,
+    "scale": 1.07,
+    "type": "sticker"
+  },
+  {
+    "style": {
+      "stickerBackgroundColor": "#f16c7f",
+      "fontSize": 0,
+      "fontFamily": 0,
+      "textAlign": "c",
+      "textAlignVertical": "m"
+    },
+    "text": "",
+    "x": -1206,
+    "y": 99,
+    "width": 199.0,
+    "height": 228.0,
+    "scale": 1.07,
+    "type": "sticker"
+  },
+  {
+    "style": {
+      "stickerBackgroundColor": "#f16c7f",
+      "fontSize": 0,
+      "fontFamily": 0,
+      "textAlign": "c",
+      "textAlignVertical": "m"
+    },
+    "text": "",
+    "x": -526,
+    "y": 99,
+    "width": 199.0,
+    "height": 228.0,
+    "scale": 1.07,
+    "type": "sticker"
+  },
+  {
+    "style": {
+      "stickerBackgroundColor": "#c9df56",
+      "fontSize": 0,
+      "fontFamily": 0,
+      "textAlign": "c",
+      "textAlignVertical": "m"
+    },
+    "text": "",
+    "x": 1005,
+    "y": 99,
+    "width": 199.0,
+    "height": 228.0,
+    "scale": 1.07,
+    "type": "sticker"
+  },
+  {
+    "style": {
+      "stickerBackgroundColor": "#be88c7",
+      "fontSize": 0,
+      "fontFamily": 0,
+      "textAlign": "c",
+      "textAlignVertical": "m"
+    },
+    "text": "",
+    "x": -1192,
+    "y": 1608,
+    "width": 199.0,
+    "height": 228.0,
+    "scale": 1.07,
+    "type": "sticker"
+  },
+  {
+    "style": {
+      "stickerBackgroundColor": "#6cd8fa",
+      "fontSize": 0,
+      "fontFamily": 0,
+      "textAlign": "c",
+      "textAlignVertical": "m"
+    },
+    "text": "",
+    "x": 1022,
+    "y": 1608,
+    "width": 199.0,
+    "height": 228.0,
+    "scale": 1.07,
+    "type": "sticker"
+  }
+]

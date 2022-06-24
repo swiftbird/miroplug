@@ -1,0 +1,41 @@
+[
+  // the main frame
+  {
+    "type": "frame",
+    "x": 0 + canvasX,
+    "y": 0 + canvasY,
+    "width": containerWidth,
+    "height": containerHeight,
+    "style": {
+      "borderWidth": 1,
+      "backgroundColor": "#ffffff"
+    }
+  },
+  // The sidebar
+  {
+
+    "style": {
+      "backgroundOpacity": 1.0,
+      "backgroundColor": "#94bfea",
+      "borderColor": "#1a1a1a",
+      "borderStyle": 2,
+      "borderOpacity": 1.0,
+      "borderWidth": 1.0,
+      "fontSize": 288,
+      "fontFamily": 0,
+      "textColor": "#ffffff",
+      "textAlign": "c",
+      "textAlignVertical": "m",
+      "shapeType": 3
+    },
+    "text": "<p><strong style=\"color:rgb(255,255,255)\">Snap-E</strong></p>",
+    "x": (canvasX + 0.0) - (containerWidth / 2) + (barHeight / 2),
+    "y": canvasY + 0.0,
+    "width": containerHeight,
+    "height": barHeight,
+    "rotation": 270.0,
+    "type": "shape",
+
+  }
+
+]

@@ -21,378 +21,77 @@ function createShape(canvasX, canvasY, color, text) {
     })
 }
 
+function updateCanvasLocation(canvasX, canvasY, data) {
+    console.log("Canvas X is: " + canvasX)
+    console.log("Canvas Y is: " + canvasY)
+    let originX =  data[0]["x"];
+    let originY = data[0]["y"]
+    console.log("Origin is: " + originX + ":" + originY)
+    for (var k in data) {
+        var x = data[k]["x"]
+        // console.log("X before: " + x)
+        data[k]["x"] = x - originX + canvasX
+        // console.log("X after: " + data[k]["x"])
 
-function getSnapForm(canvasX, canvasY) {
-    return [
+        var y = data[k]["y"]
+        data[k]["y"] = y - originY + canvasY
+        // console.log("y before: " + y)
+        // console.log("y after: " + data[k]["y"] )
+        // console.log(data[k]["x"])
 
-        {
+        // var bx = data[k]["bounds"]["x"]
+        // data[k]["bounds"]["x"] = bx + canvasX
+        //
+        // var by = data[k]["bounds"]["y"]
+        // data[k]["bounds"]["y"] = by + canvasY
+    }
+    return data
 
-            "type": "frame",
-            "x": 0.0 + canvasX,
-            "y": 0.0 + canvasY,
-            "width": 3100.0,
-            "height": 4600.0,
-
-            "style": {
-                "backgroundColor": "#ffffff",
-                "borderWidth": 1
-            },
-
-        },
-
-        // Title Bar
-        {
-
-            "style": {
-                "backgroundOpacity": 1.0,
-                "backgroundColor": "#94bfea",
-                "borderColor": "#1a1a1a",
-                "borderStyle": 2,
-                "borderOpacity": 1.0,
-                "borderWidth": 1.0,
-                "fontSize": 144,
-                "fontFamily": 0,
-                "textColor": "#ffffff",
-                "textAlign": "c",
-                "textAlignVertical": "m",
-                "shapeType": 3
-            },
-            "text": "<p><strong style=\"color:rgb(255,255,255)\">Service Name</strong></p>",
-            "x": canvasX + 0.0,
-            "y": canvasY + -2050,
-            "width": 3000.0,
-            "height": 407.937138671738,
-            "rotation": 0.0,
-            "type": "shape",
-
-        },
-        // APIs
-        {
-
-            "style": {
-                "padding": 0,
-                "backgroundOpacity": 1.0,
-                "backgroundColor": "#ffffffff",
-                "borderColor": "#ffffffff",
-                "borderStyle": 2,
-                "borderOpacity": 1.0,
-                "borderWidth": 0.0,
-                "fontSize": 144,
-                "fontFamily": 0,
-                "textColor": "#1a1a1a",
-                "textAlign": "c",
-                "shapeType": "text_rect"
-            },
-            "text": "<p>APIs</p>",
-            "x": canvasX + -1000,
-            "y": canvasY + -1500,
-            "width": 30,
-            "scale": 10.2857142857143,
-            "rotation": 0.0,
-            "type": "text",
-
-
-        },
-        // Data
-        {
-
-            "style": {
-                "padding": 0,
-                "backgroundOpacity": 1.0,
-                "backgroundColor": "#ffffffff",
-                "borderColor": "#ffffffff",
-                "borderStyle": 2,
-                "borderOpacity": 1.0,
-                "borderWidth": 0.0,
-                "fontSize": 144,
-                "fontFamily": 0,
-                "textColor": "#1a1a1a",
-                "textAlign": "c",
-                "shapeType": "text_rect"
-            },
-            "text": "<p>Data</p>",
-            "x": canvasX + 800,
-            "y": canvasY + -1500,
-            "width": 35,
-            "scale": 10.2857142857143,
-            "rotation": 0.0,
-            "type": "text",
-
-        },
-        // Pub
-        {
-
-            "style": {
-                "padding": 0,
-                "backgroundOpacity": 1.0,
-                "backgroundColor": "#ffffffff",
-                "borderColor": "#ffffffff",
-                "borderStyle": 2,
-                "borderOpacity": 1.0,
-                "borderWidth": 0.0,
-                "fontSize": 144,
-                "fontFamily": 0,
-                "textColor": "#1a1a1a",
-                "textAlign": "c",
-                "shapeType": "text_rect"
-            },
-            "text": "<p>Pub</p>",
-            "x": canvasX + -1206.74081978741,
-            "y": canvasY + -215,
-            "width": 30,
-            "scale": 10.2857142857143,
-            "rotation": 0.0,
-            "type": "text",
-
-        },
-        // Sub
-        {
-
-            "style": {
-                "padding": 0,
-                "backgroundOpacity": 1.0,
-                "backgroundColor": "#ffffffff",
-                "borderColor": "#ffffffff",
-                "borderStyle": 2,
-                "borderOpacity": 1.0,
-                "borderWidth": 0.0,
-                "fontSize": 144,
-                "fontFamily": 0,
-                "textColor": "#1a1a1a",
-                "textAlign": "c",
-                "shapeType": "text_rect"
-            },
-            "text": "<p>Sub</p>",
-            "x": canvasX + -526.440096948559,
-            "y": canvasY + -215,
-            "width": 30,
-            "scale": 10.2857142857143,
-            "rotation": 0.0,
-            "type": "text",
-
-        },
-        // External
-        {
-
-            "style": {
-                "padding": 0,
-                "backgroundOpacity": 1.0,
-                "backgroundColor": "#ffffffff",
-                "borderColor": "#ffffffff",
-                "borderStyle": 2,
-                "borderOpacity": 1.0,
-                "borderWidth": 0.0,
-                "fontSize": 144,
-                "fontFamily": 0,
-                "textColor": "#1a1a1a",
-                "textAlign": "c",
-                "shapeType": "text_rect"
-            },
-            "text": "<p>External</p>",
-            "x": canvasX + 800,
-            "y": canvasY + -215,
-            "width": 55,
-            "scale": 10.2857142857143,
-            "rotation": 0.0,
-            "type": "text",
-
-        },
-        // Stories
-        {
-
-            "style": {
-                "padding": 0,
-                "backgroundOpacity": 1.0,
-                "backgroundColor": "#ffffffff",
-                "borderColor": "#ffffffff",
-                "borderStyle": 2,
-                "borderOpacity": 1.0,
-                "borderWidth": 0.0,
-                "fontSize": 144,
-                "fontFamily": 0,
-                "textColor": "#1a1a1a",
-                "textAlign": "c",
-                "shapeType": "text_rect"
-            },
-            "text": "<p>Stories / Logic</p>",
-            "x": canvasX + -940,
-            "y": canvasY + 1330,
-            "width": 100,
-            "scale": 10.2857142857143,
-            "rotation": 0.0,
-            "type": "text",
-
-        },
-        {
-
-            "style": {
-                "padding": 0,
-                "backgroundOpacity": 1.0,
-                "backgroundColor": "#ffffffff",
-                "borderColor": "#ffffffff",
-                "borderStyle": 2,
-                "borderOpacity": 1.0,
-                "borderWidth": 0.0,
-                "fontSize": 144,
-                "fontFamily": 0,
-                "textColor": "#1a1a1a",
-                "textAlign": "c",
-                "shapeType": "text_rect"
-            },
-            "text": "<p>UI</p>",
-            "x": canvasX + 800,
-            "y": canvasY + 1330,
-            "width": 7.52,
-            "scale": 10.2857142857143,
-            "rotation": 0.0,
-            "type": "text",
-
-        },
-        // API sticker
-        {
-
-            "style": {
-                "backgroundColor": "#f5d128",
-                "fontSize": 0,
-                "fontFamily": 0,
-                "textAlign": "c",
-                "textAlignVertical": "m"
-            },
-            "text": "<p><br /></p>",
-            "x": canvasX + -1233,
-            "y": canvasY + -1200,
-            "width": 199.0,
-            "height": 228.0,
-            "scale": 1.07,
-            "type": "sticker",
-            "metadata": {
-                "3458764519010334012": {
-                    "swifttype": "API",
-                    "donkey": "Llama"
-                }
-            }
-
-        },
-        // Data Sticker
-        {
-
-            "style": {
-                "stickerBackgroundColor": "#a6ccf5",
-                "fontSize": 0,
-                "fontFamily": 0,
-                "textAlign": "c",
-                "textAlignVertical": "m"
-            },
-            "text": "",
-            "x": canvasX + 1053,
-            "y": canvasY + -1200,
-            "width": 199.0,
-            "height": 228.0,
-            "scale": 1.07,
-            "type": "sticker",
-
-        },
-        {
-
-            "style": {
-                "stickerBackgroundColor": "#f16c7f",
-                "fontSize": 0,
-                "fontFamily": 0,
-                "textAlign": "c",
-                "textAlignVertical": "m"
-            },
-            "text": "",
-            "x": canvasX + -1206,
-            "y": canvasY + 99,
-            "width": 199.0,
-            "height": 228.0,
-            "scale": 1.07,
-            "type": "sticker",
-
-        },
-        {
-
-            "style": {
-                "stickerBackgroundColor": "#f16c7f",
-                "fontSize": 0,
-                "fontFamily": 0,
-                "textAlign": "c",
-                "textAlignVertical": "m"
-            },
-            "text": "",
-            "x": canvasX + -526,
-            "y": canvasY + 99,
-            "width": 199.0,
-            "height": 228.0,
-            "scale": 1.07,
-            "type": "sticker",
-
-        },
-        {
-
-            "style": {
-                "stickerBackgroundColor": "#c9df56",
-                "fontSize": 0,
-                "fontFamily": 0,
-                "textAlign": "c",
-                "textAlignVertical": "m"
-            },
-            "text": "",
-            "x": canvasX + 1005,
-            "y": canvasY + 99,
-            "width": 199.0,
-            "height": 228.0,
-            "scale": 1.07,
-            "type": "sticker",
-
-        },
-        {
-
-            "style": {
-                "stickerBackgroundColor": "#be88c7",
-                "fontSize": 0,
-                "fontFamily": 0,
-                "textAlign": "c",
-                "textAlignVertical": "m"
-            },
-            "text": "",
-            "x": canvasX + -1192,
-            "y": canvasY + 1608,
-            "width": 199.0,
-            "height": 228.0,
-            "scale": 1.07,
-            "type": "sticker",
-
-        },
-        {
-
-            "style": {
-                "stickerBackgroundColor": "#6cd8fa",
-                "fontSize": 0,
-                "fontFamily": 0,
-                "textAlign": "c",
-                "textAlignVertical": "m"
-            },
-            "text": "",
-            "x": canvasX + 1022,
-            "y": canvasY + 1608,
-            "width": 199.0,
-            "height": 228.0,
-            "scale": 1.07,
-            "type": "sticker",
-
-        }
-
-    ]
 }
 
-function createSnap(canvasX, canvasY, color, text) {
-    return miro.board.widgets.create(
-        getSnapForm(canvasX, canvasY)
-    )
+function removeIds(data) {
+    for (var k in data) {
+        delete data[k].id
+        delete data[k].bounds
+    }
+    return data
 }
 
-function createFullSnap(canvasX, canvasY) {
+async function createSnapForm(canvasX, canvasY) {
+    // fetch("snapwidgets/snapforms/").then((response) => {response.json().then((data) => {return updateCanvasLocation(canvasX,canvasY ,data)})})
+    let response = await fetch('snapwidgets/snapforms/');
+    let json = await response.json();
+    let localizedJson = updateCanvasLocation(canvasX,canvasY, json)
+    console.log(localizedJson)
+    return miro.board.widgets.create(localizedJson)
+
+}
+
+async function createSnapDirectionsTemplate(canvasX, canvasY) {
+    // fetch("snapwidgets/snapforms/").then((response) => {response.json().then((data) => {return updateCanvasLocation(canvasX,canvasY ,data)})})
+    let response = await fetch('snapwidgets/snapdirections/');
+    let json = await response.json();
+
+    let localizedJson = updateCanvasLocation(canvasX,canvasY, json)
+    console.log(localizedJson)
+
+    return miro.board.widgets.create(removeIds(localizedJson))
+
+}
+
+async function createEventStormTemplate(canvasX, canvasY) {
+    // fetch("snapwidgets/snapforms/").then((response) => {response.json().then((data) => {return updateCanvasLocation(canvasX,canvasY ,data)})})
+    let response = await fetch('snapwidgets/eventstorms/');
+    let json = await response.json();
+
+    let localizedJson = updateCanvasLocation(canvasX,canvasY, json)
+    console.log(localizedJson)
+
+    return miro.board.widgets.create(removeIds(localizedJson))
+
+}
+
+function createSnapTemplate(canvasX, canvasY) {
     let containerWidth = 45000
     let containerHeight = 16000
     let barHeight = 800
@@ -443,7 +142,6 @@ function createFullSnap(canvasX, canvasY) {
     )
 
     miro.board.widgets.create(
-
         {
             "type": "embed",
             "x": 0 + canvasX,
@@ -456,16 +154,15 @@ function createFullSnap(canvasX, canvasY) {
         }
     )
 
-    return miro.board.widgets.create(
-        getSnapForm(canvasX, canvasY)
-    )
+    return createSnapForm(canvasX,canvasY)
+
 }
 
 function bootstrap() {
     const container = document.getElementById('swiftdoc')
     // addShapes(container)
     // addImages(container)
-    console.log(("I am bootstrapping: "))
+    console.log(("I am bootstrapping REALLY HARD: "))
 
     // Async stuff
     // miro.board.widgets.get({}).then((wid => console.log(wid)))
@@ -504,7 +201,7 @@ function bootstrap() {
         onClick: async (targetElement) => {
             const color = targetElement.getAttribute('data-color')
             const text = targetElement.innerText
-            const widget = (await createSnap(0, 0, color, text))[0]
+            const widget = (await createSnapForm(0, 0, color, text))[0]
             miro.board.viewport.zoomToObject(widget)
         },
         getDraggableItemPreview: (targetElement) => {
@@ -520,7 +217,7 @@ function bootstrap() {
         onDrop: (canvasX, canvasY) => {
             console.log('onDrop 2')
             // createShape(canvasX, canvasY, currentShapeColor, currentShapeText)
-            createSnap(canvasX, canvasY, currentShapeColor, currentShapeText)
+            createSnapForm(canvasX, canvasY, currentShapeColor, currentShapeText)
 
         },
     }
@@ -532,7 +229,7 @@ function bootstrap() {
         onClick: async (targetElement) => {
             const color = targetElement.getAttribute('data-color')
             const text = targetElement.innerText
-            const widget = (await createFullSnap(0, 0, color, text))[0]
+            const widget = (await createSnapTemplate(0, 0, color, text))[0]
             miro.board.viewport.zoomToObject(widget)
         },
         getDraggableItemPreview: (targetElement) => {
@@ -547,12 +244,71 @@ function bootstrap() {
         onDrop: (canvasX, canvasY) => {
             console.log('Dropped full snap')
             // createShape(canvasX, canvasY, currentShapeColor, currentShapeText)
-            createFullSnap(canvasX, canvasY)
+            createSnapTemplate(canvasX, canvasY)
 
 
         },
     }
     miro.board.ui.initDraggableItemsContainer(fullSnapContainer, fullSnapOptions)
+
+    // Init the Snap Directions drag container
+    const snapDirectionContainer = document.getElementById('snapdirectionscontainer')
+    console.log("I got the snapdirections element")
+    console.log(snapDirectionContainer)
+    const snapDirectionsOptions = {
+        draggableItemSelector: '.snapdirections',
+        onClick: async (targetElement) => {
+            const color = targetElement.getAttribute('data-color')
+            const text = targetElement.innerText
+            const widget = (await createSnapDirectionsTemplate(0, 0, color, text))[0]
+            miro.board.viewport.zoomToObject(widget)
+        },
+        getDraggableItemPreview: (targetElement) => {
+
+            return {
+                width: 40,
+                height: 40,
+                url: `data:image/svg+xml,` + accelerate24,
+                // url: `data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Crect stroke='null' x='0' y='0' fill='%23${currentShapeColor}' height='100' width='100'/%3E%3C/g%3E%3C/svg%3E`,
+            }
+        },
+        onDrop: (canvasX, canvasY) => {
+            console.log('Dropped snap directions')
+            // createShape(canvasX, canvasY, currentShapeColor, currentShapeText)
+            createSnapDirectionsTemplate(canvasX, canvasY)
+        },
+    }
+    miro.board.ui.initDraggableItemsContainer(snapDirectionContainer, snapDirectionsOptions)
+
+    // Init the EventStorming Template drag container
+    const esTemplateContainer = document.getElementById('eventstormcontainer')
+    console.log("I got the eventstorm element")
+    console.log(esTemplateContainer)
+    const esTemplateOptions = {
+        draggableItemSelector: '.eventstormtemplate',
+        onClick: async (targetElement) => {
+            const color = targetElement.getAttribute('data-color')
+            const text = targetElement.innerText
+            const widget = (await createEventStormTemplate(0, 0, color, text))[0]
+            miro.board.viewport.zoomToObject(widget)
+        },
+        getDraggableItemPreview: (targetElement) => {
+
+            return {
+                width: 40,
+                height: 40,
+                url: `data:image/svg+xml,` + accelerate24,
+                // url: `data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Crect stroke='null' x='0' y='0' fill='%23${currentShapeColor}' height='100' width='100'/%3E%3C/g%3E%3C/svg%3E`,
+            }
+        },
+        onDrop: (canvasX, canvasY) => {
+            console.log('Dropped snap directions')
+            // createShape(canvasX, canvasY, currentShapeColor, currentShapeText)
+            createEventStormTemplate(canvasX, canvasY)
+        },
+    }
+    miro.board.ui.initDraggableItemsContainer(esTemplateContainer, esTemplateOptions)
+
 }
 
 miro.onReady(bootstrap)
