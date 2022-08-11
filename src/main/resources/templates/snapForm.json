@@ -1,34 +1,29 @@
 [
   {
     "type": "frame",
-    "metadata": {
-      "3458764523130768268": {
-        "swifttype": "API",
-        "donkey": "Llama"
-      }
-    },
+
     "x": 0.0,
     "y": 0.0,
     "width": 3100.0,
     "height": 4600.0,
     "style": {
-      "backgroundColor": "#ffffff",
+      "fillColor": "#ffffff",
       "borderWidth": 1
     }
   },
   {
     "style": {
-      "backgroundOpacity": 1.0,
-      "backgroundColor": "#94bfea",
+      "fillOpacity": 1.0,
+      "fillColor": "#94bfea",
       "borderColor": "#1a1a1a",
       "borderStyle": 2,
       "borderOpacity": 1.0,
       "borderWidth": 1.0,
       "fontSize": 144,
-      "fontFamily": 0,
+      "fontFamily": "arial",
       "textColor": "#ffffff",
-      "textAlign": "c",
-      "textAlignVertical": "m",
+      "textAlign": "center",
+      "textAlignVertical": "middle",
       "shapeType": 3
     },
     "text": "<p><strong style=\"color:rgb(255,255,255)\">Service Name</strong></p>",
@@ -41,17 +36,17 @@
   },
   {
     "style": {
-      "padding": 0,
-      "backgroundOpacity": 1.0,
-      "backgroundColor": "#ffffffff",
+      
+      "fillOpacity": 1.0,
+      "fillColor": "#ffffffff",
       "borderColor": "#ffffffff",
       "borderStyle": 2,
       "borderOpacity": 1.0,
       "borderWidth": 0.0,
       "fontSize": 144,
-      "fontFamily": 0,
+      "fontFamily": "arial",
       "textColor": "#1a1a1a",
-      "textAlign": "c",
+      "textAlign": "center",
       "shapeType": "text_rect"
     },
     "text": "<p>APIs</p>",
@@ -64,17 +59,17 @@
   },
   {
     "style": {
-      "padding": 0,
-      "backgroundOpacity": 1.0,
-      "backgroundColor": "#ffffffff",
+      
+      "fillOpacity": 1.0,
+      "fillColor": "#ffffffff",
       "borderColor": "#ffffffff",
       "borderStyle": 2,
       "borderOpacity": 1.0,
       "borderWidth": 0.0,
       "fontSize": 144,
-      "fontFamily": 0,
+      "fontFamily": "arial",
       "textColor": "#1a1a1a",
-      "textAlign": "c",
+      "textAlign": "center",
       "shapeType": "text_rect"
     },
     "text": "<p>Data</p>",
@@ -87,17 +82,17 @@
   },
   {
     "style": {
-      "padding": 0,
-      "backgroundOpacity": 1.0,
-      "backgroundColor": "#ffffffff",
+      
+      "fillOpacity": 1.0,
+      "fillColor": "#ffffffff",
       "borderColor": "#ffffffff",
       "borderStyle": 2,
       "borderOpacity": 1.0,
       "borderWidth": 0.0,
       "fontSize": 144,
-      "fontFamily": 0,
+      "fontFamily": "arial",
       "textColor": "#1a1a1a",
-      "textAlign": "c",
+      "textAlign": "center",
       "shapeType": "text_rect"
     },
     "text": "<p>Pub</p>",
@@ -110,17 +105,17 @@
   },
   {
     "style": {
-      "padding": 0,
-      "backgroundOpacity": 1.0,
-      "backgroundColor": "#ffffffff",
+      
+      "fillOpacity": 1.0,
+      "fillColor": "#ffffffff",
       "borderColor": "#ffffffff",
       "borderStyle": 2,
       "borderOpacity": 1.0,
       "borderWidth": 0.0,
       "fontSize": 144,
-      "fontFamily": 0,
+      "fontFamily": "arial",
       "textColor": "#1a1a1a",
-      "textAlign": "c",
+      "textAlign": "center",
       "shapeType": "text_rect"
     },
     "text": "<p>Sub</p>",
@@ -133,17 +128,17 @@
   },
   {
     "style": {
-      "padding": 0,
-      "backgroundOpacity": 1.0,
-      "backgroundColor": "#ffffffff",
+      
+      "fillOpacity": 1.0,
+      "fillColor": "#ffffffff",
       "borderColor": "#ffffffff",
       "borderStyle": 2,
       "borderOpacity": 1.0,
       "borderWidth": 0.0,
       "fontSize": 144,
-      "fontFamily": 0,
+      "fontFamily": "arial",
       "textColor": "#1a1a1a",
-      "textAlign": "c",
+      "textAlign": "center",
       "shapeType": "text_rect"
     },
     "text": "<p>External</p>",
@@ -156,17 +151,17 @@
   },
   {
     "style": {
-      "padding": 0,
-      "backgroundOpacity": 1.0,
-      "backgroundColor": "#ffffffff",
+      
+      "fillOpacity": 1.0,
+      "fillColor": "#ffffffff",
       "borderColor": "#ffffffff",
       "borderStyle": 2,
       "borderOpacity": 1.0,
       "borderWidth": 0.0,
       "fontSize": 144,
-      "fontFamily": 0,
+      "fontFamily": "arial",
       "textColor": "#1a1a1a",
-      "textAlign": "c",
+      "textAlign": "center",
       "shapeType": "text_rect"
     },
     "text": "<p>Stories / Logic</p>",
@@ -179,17 +174,17 @@
   },
   {
     "style": {
-      "padding": 0,
-      "backgroundOpacity": 1.0,
-      "backgroundColor": "#ffffffff",
+      
+      "fillOpacity": 1.0,
+      "fillColor": "#ffffffff",
       "borderColor": "#ffffffff",
       "borderStyle": 2,
       "borderOpacity": 1.0,
       "borderWidth": 0.0,
       "fontSize": 144,
-      "fontFamily": 0,
+      "fontFamily": "arial",
       "textColor": "#1a1a1a",
-      "textAlign": "c",
+      "textAlign": "center",
       "shapeType": "text_rect"
     },
     "text": "<p>UI</p>",
@@ -202,11 +197,11 @@
   },
   {
     "style": {
-      "backgroundColor": "#f5d128",
+      "fillColor": "#f5d128",
       "fontSize": 0,
-      "fontFamily": 0,
-      "textAlign": "c",
-      "textAlignVertical": "m"
+      "fontFamily": "arial",
+      "textAlign": "center",
+      "textAlignVertical": "middle"
     },
     "text": "<p><br /></p>",
     "x": -1233,
@@ -220,9 +215,9 @@
     "style": {
       "stickerBackgroundColor": "#a6ccf5",
       "fontSize": 0,
-      "fontFamily": 0,
-      "textAlign": "c",
-      "textAlignVertical": "m"
+      "fontFamily": "arial",
+      "textAlign": "center",
+      "textAlignVertical": "middle"
     },
     "text": "",
     "x": 1053,
@@ -236,9 +231,9 @@
     "style": {
       "stickerBackgroundColor": "#f16c7f",
       "fontSize": 0,
-      "fontFamily": 0,
-      "textAlign": "c",
-      "textAlignVertical": "m"
+      "fontFamily": "arial",
+      "textAlign": "center",
+      "textAlignVertical": "middle"
     },
     "text": "",
     "x": -1206,
@@ -252,9 +247,9 @@
     "style": {
       "stickerBackgroundColor": "#f16c7f",
       "fontSize": 0,
-      "fontFamily": 0,
-      "textAlign": "c",
-      "textAlignVertical": "m"
+      "fontFamily": "arial",
+      "textAlign": "center",
+      "textAlignVertical": "middle"
     },
     "text": "",
     "x": -526,
@@ -268,9 +263,9 @@
     "style": {
       "stickerBackgroundColor": "#c9df56",
       "fontSize": 0,
-      "fontFamily": 0,
-      "textAlign": "c",
-      "textAlignVertical": "m"
+      "fontFamily": "arial",
+      "textAlign": "center",
+      "textAlignVertical": "middle"
     },
     "text": "",
     "x": 1005,
@@ -284,9 +279,9 @@
     "style": {
       "stickerBackgroundColor": "#be88c7",
       "fontSize": 0,
-      "fontFamily": 0,
-      "textAlign": "c",
-      "textAlignVertical": "m"
+      "fontFamily": "arial",
+      "textAlign": "center",
+      "textAlignVertical": "middle"
     },
     "text": "",
     "x": -1192,
@@ -300,9 +295,9 @@
     "style": {
       "stickerBackgroundColor": "#6cd8fa",
       "fontSize": 0,
-      "fontFamily": 0,
-      "textAlign": "c",
-      "textAlignVertical": "m"
+      "fontFamily": "arial",
+      "textAlign": "center",
+      "textAlignVertical": "middle"
     },
     "text": "",
     "x": 1022,
@@ -313,3 +308,5 @@
     "type": "sticker"
   }
 ]
+
+

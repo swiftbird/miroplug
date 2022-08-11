@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://miro.com/app/static/sdk.1.1.js"></script>
+<!--<script src="https://miro.com/app/static/sdk.1.1.js"></script>-->
+<script src="https://miro.com/app/static/sdk/v2/miro.js"></script>
 <script src="js/swift.js"></script>
 
 <script>
@@ -24,7 +25,9 @@
         }
     }
 </script>
-
+<!--<div class="miro-draggable">Drag</div>-->
+<!--<div class="miro-draggable">on</div>-->
+<!--<div class="miro-draggable">dragon</div>-->
 <div class="accordion" id="accordionExample" style="width: 340px;">
     <div class="flex divide-x justify-start divide-gray-200 p-2 items-center">
 
@@ -61,6 +64,7 @@
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
         >
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
+
                 <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
                 <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
                 <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
@@ -92,7 +96,7 @@
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
-                <div id="eventstormcontainer" class="shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="The full template">
+                <div id="es_template" class="miro-draggable shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="The full template">
 
                     <div  class="shape flex flex-col items-center py-3">
                         <img class="eventstormtemplate shape h-12 rounded" src="images/EventStormingTemplate.png" alt="ESTemplate">

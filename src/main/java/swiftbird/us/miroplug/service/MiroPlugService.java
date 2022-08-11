@@ -1,6 +1,7 @@
 package swiftbird.us.miroplug.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
@@ -20,18 +21,20 @@ public class MiroPlugService {
     @Value("classpath:templates/BorisDirections.json")
     Resource borisDirectionsTemplate;
 
-    @Value("classpath:templates/EventStorming.json")
+    @Value("classpath:templates/es_template.json")
     Resource esTemplateJson;
 
     public String getSnapFormTemplate() {
-        String result = "Nope";
+        System.out.println("Loading...." + loadJson("capture"));
 
-        try {
-            File snapForm = snapFormTemplate.getFile();
-            result = new String(Files.readAllBytes(snapForm.toPath()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        String result = "Nope";
+String result = loadJson("capture");
+//        try {
+//            File snapForm = snapFormTemplate.getFile();
+//            result = new String(Files.readAllBytes(snapForm.toPath()));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         System.out.println("Fetched Snap Form Template: " + result);
         return result;
     }
@@ -73,6 +76,22 @@ public class MiroPlugService {
         System.out.println("Fetched ES Template: " + result);
         return result;
 
+    }
+
+    public String loadJson(String name) {
+
+        System.out.println("I got it");
+        String result = null;
+        try {
+            ClassPathResource resource = new ClassPathResource("templates/" + name + ".json");
+            File file = resource.getFile();
+            result = new String(Files.readAllBytes(file.toPath()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Here is the money shot: ");
+        System.out.println(result);
+        return result;
     }
 }
 

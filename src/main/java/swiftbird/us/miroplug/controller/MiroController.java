@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import swiftbird.us.miroplug.service.MiroPlugService;
 
+import javax.annotation.Resource;
+
 @RequestMapping(value ="/")
 @RestController
 public class MiroController {
@@ -18,21 +20,27 @@ public class MiroController {
 
     }
 
-    @GetMapping(value = "/snapwidgets/snapforms/")
+    @GetMapping(value = "/swiftwidgets")
+    @ResponseBody
+    public String getWidget(@RequestParam String element) {
+        return service.loadJson(element);
+    }
+
+    @GetMapping(value = "/swiftwidgets/snapforms/")
     @ResponseBody
     public String getSnapDocs() {
         return service.getSnapFormTemplate();
 
     }
 
-    @GetMapping(value = "/snapwidgets/snaptemplates/")
+    @GetMapping(value = "/swiftwidgets/snaptemplates/")
     @ResponseBody
     public String getSnapTemplate() {
         return service.getSnapTemplate();
 
     }
 
-    @GetMapping(value = "/snapwidgets/snapdirections/")
+    @GetMapping(value = "/swiftwidgets/snapdirections/")
     @ResponseBody
     public String getSnapDirections() {
         return service.getSnapDirections();
@@ -40,14 +48,14 @@ public class MiroController {
     }
 
 
-    @GetMapping(value = "/snapwidgets/eventstorms/")
+    @GetMapping(value = "/swiftwidgets/eventstorms/")
     @ResponseBody
     public String getEventStormTemplate() {
         return service.getEventStormTemplate();
 
     }
 
-    @PostMapping(value = "/snapwidgets/dump/")
+    @PostMapping(value = "/swiftwidgets/dump/")
     @ResponseBody
     public String dumpJson(@RequestBody String json) {
         System.out.println(json);
