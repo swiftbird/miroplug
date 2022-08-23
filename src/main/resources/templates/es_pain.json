@@ -1,0 +1,24 @@
+[
+  {
+    "type": "sticky_note",
+    "shape": "square",
+    "content": "<p>Pain... so much pain.</p>",
+    "style": {
+      "fillColor": "red",
+      "textAlign": "center",
+      "textAlignVertical": "middle"
+    },
+    "tagIds": [],
+    "id": "3458764531290116644",
+    "parentId": "3458764531290116554",
+    "origin": "center",
+    "createdAt": "2022-08-15T18:35:10.485Z",
+    "createdBy": "3458764518372570852",
+    "modifiedAt": "2022-08-15T18:35:56.026Z",
+    "modifiedBy": "3458764518372570852",
+    "x": 6238.646775859204,
+    "y": 3039.224065135175,
+
+    "height": 243.96
+  }
+]

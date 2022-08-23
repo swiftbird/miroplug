@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+<body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"/>
@@ -38,11 +39,12 @@
             <i class="fa-solid fa-sliders text-gray-500 fa-xl cursor-pointer hover:text-gray-800"></i>
         </div>
     </div>
+
     <div class="accordion-item bg-white border border-gray-200">
         <h2 class="accordion-header mb-0" id="headingOne">
-
             <button class="
         accordion-button
+        collapsed
         relative
         flex
         items-center
@@ -55,23 +57,55 @@
         rounded-none
         transition
         focus:outline-none
-
-      " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+      " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
                     aria-controls="collapseOne">
                 Swift Overview
             </button>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-        >
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
+                <div id="ov_template"
+                     class="miro-draggable shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="The full template">
 
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                    <div class="shape flex flex-col items-center py-3">
+                        <img class="ovtemplate shape h-12 rounded" src="images/EventStormingTemplate.png"
+                             alt="ESTemplate">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Template</div>
+                </div>
+                <div id="ov_event"
+                     class="miro-draggable shape bg-white w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Business Event">
+
+                    <div class="shape flex flex-col items-center py-3">
+                        <img class="businessevent shape h-8 rounded" src="images/BusinessEvent.png" alt="BusinessEvent">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Business Event</div>
+                </div>
+                <div id="ov_pain"
+                     class="miro-draggable shape bg-white w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Pain Point">
+
+                    <div class="shape flex flex-col items-center py-3">
+                        <img class="painpoint shape h-8 rounded" src="images/PainPoint.png" alt="PaintPoint">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Pain Point</div>
+                </div>
+                <div id="ov_command"
+                     class="miro-draggable shape bg-white w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Command">
+
+                    <div class="shape flex flex-col items-center py-3">
+                        <img class="command shape h-8 rounded" src="images/Command.png" alt="PaintPoint">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Command</div>
+                </div>
+
             </div>
         </div>
     </div>
+
     <div class="accordion-item bg-white border border-gray-200">
         <h2 class="accordion-header mb-0" id="headingTwo">
             <button class="
@@ -96,17 +130,44 @@
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
-                <div id="es_template" class="miro-draggable shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="The full template">
+                <div id="es_template"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="The full template">
 
-                    <div  class="shape flex flex-col items-center py-3">
-                        <img class="eventstormtemplate shape h-12 rounded" src="images/EventStormingTemplate.png" alt="ESTemplate">
+                    <div class="shape flex flex-col items-center py-3">
+                        <img class="eventstormtemplate shape h-12 rounded" src="images/EventStormingTemplate.png"
+                             alt="ESTemplate">
                     </div>
                     <div class="flexHeader text-center text-gray-400 text-sm">Template</div>
                 </div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="®tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div id="es_event"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Business Event">
+
+                    <div class="shape flex flex-col items-center py-3">
+                        <img class="businessevent shape h-8 rounded" src="images/BusinessEvent.png" alt="BusinessEvent">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Business Event</div>
+                </div>
+                <div id="es_pain"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Pain Point">
+
+                    <div class="shape flex flex-col items-center py-3">
+                        <img class="painpoint shape h-8 rounded" src="images/PainPoint.png" alt="PaintPoint">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Pain Point</div>
+                </div>
+                <div id="es_command"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Command">
+
+                    <div class="shape flex flex-col items-center py-3">
+                        <img class="command shape h-8 rounded" src="images/Command.png" alt="PaintPoint">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Command</div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -137,10 +198,14 @@
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
 
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
             </div>
         </div>
     </div>
@@ -173,10 +238,14 @@
         >
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
 
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
             </div>
         </div>
     </div>
@@ -209,10 +278,14 @@
         <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
         >
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
             </div>
         </div>
     </div>
@@ -244,34 +317,41 @@
         >
             <div class="shape accordion-body py-4 px-5 grid grid-cols-3 gap-4">
 
-                <div id="fullsnap" class="shape bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Create a blank Snap template">
-                    <div  class="shape">
-                        <div  class="shape flex flex-col items-center py-3">
+                <div id="fullsnap" class="shape bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Create a blank Snap template">
+                    <div class="shape">
+                        <div class="shape flex flex-col items-center py-3">
                             <img class="snapfull h-12 rounded" src="images/snaptemplate.png" alt="SnapPillar">
                         </div>
                         <div class="flexHeader text-center text-gray-400 text-sm">Template</div>
                     </div>
                 </div>
 
-                <div id="swiftdoc" class="shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Make a blank Snap form">
+                <div id="swiftdoc"
+                     class="shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Make a blank Snap form">
 
-                    <div  class="shape flex flex-col items-center py-3">
+                    <div class="shape flex flex-col items-center py-3">
                         <img class="shape h-12 rounded" src="images/snapdoc.png" alt="Snap">
                     </div>
                     <div class="flexHeader text-center text-gray-400 text-sm">Snap Form</div>
                 </div>
 
-                <div id="snapdirectionscontainer" class="shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Make a blank Snap form">
+                <div id="snapdirectionscontainer"
+                     class="shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Make a blank Snap form">
 
-                    <div  class="shape flex flex-col items-center py-3">
+                    <div class="shape flex flex-col items-center py-3">
                         <img class="snapdirections shape h-12 rounded" src="images/BorisDirections.png" alt="BorisDir">
                     </div>
                     <div class="flexHeader text-center text-gray-400 text-sm">Directions</div>
                 </div>
 
 
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
             </div>
         </div>
     </div>
@@ -304,10 +384,14 @@
         >
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
 
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
             </div>
         </div>
     </div> <!-- End Accordian -->
@@ -339,10 +423,14 @@
         >
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
 
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer" data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
             </div>
         </div>
     </div> <!-- End Accordian -->

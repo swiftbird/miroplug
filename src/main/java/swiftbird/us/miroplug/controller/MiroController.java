@@ -26,6 +26,13 @@ public class MiroController {
         return service.loadJson(element);
     }
 
+    @PostMapping(value = "/swiftwidgets")
+    @ResponseBody
+    public String saveWidget(@RequestBody String widget) {
+        System.out.println("Got a widget: " + widget);
+        return widget;
+    }
+
     @GetMapping(value = "/swiftwidgets/snapforms/")
     @ResponseBody
     public String getSnapDocs() {

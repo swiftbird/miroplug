@@ -1,24 +1,24 @@
 [
+  {
+    "type": "frame",
+    "title": "",
 
+    "style": {
+      "fillColor": "#ffffff"
+    },
+    "id": "3458764530866331289",
+    "parentId": null,
+    "origin": "center",
+    "createdAt": "2022-08-08T15:28:21.703Z",
+    "createdBy": "3458764518372570852",
+    "modifiedAt": "2022-08-11T18:59:41.049Z",
+    "modifiedBy": "3458764518372570852",
+    "x": 9627,
+    "y": 3987,
+    "height": 7972.75462550021,
+    "width": 19252.9990114152
+  },
 
-    {
-      "type": "image",
-      "title": "",
-      "id": "3458764530866331295",
-      "parentId": "3458764530866331289",
-      "origin": "center",
-      "createdAt": "2022-08-08T15:28:21.703Z",
-      "createdBy": "3458764518372570852",
-      "modifiedAt": "2022-08-11T18:59:41.049Z",
-      "modifiedBy": "3458764518372570852",
-      "x": 1546.07301617162,
-      "y": 828.8535036391113,
-      "width": 1504.1427001913614,
-
-      "rotation": 0,
-      "url": "https://static.wixstatic.com/media/877657_7b90ff34f2fa4d9da1d540b4c750d3bb~mv2.jpg/v1/fill/w_76,h_80,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/swiftbird%20(1).jpg"
-    }
-  ,
     {
       "type": "shape",
       "content": "",
@@ -1499,8 +1499,7 @@
       "fontSize": 57,
       "textAlign": "left"
     },
-    "id": "3458764530866331357",
-    "parentId": "3458764530866331289",
+
     "origin": "center",
     "createdAt": "2022-08-08T15:28:21.703Z",
     "createdBy": "3458764518372570852",
@@ -1546,8 +1545,7 @@
       "textAlign": "left",
       "textAlignVertical": "middle"
     },
-    "id": "3458764530866331360",
-    "parentId": "3458764530866331289",
+
     "origin": "center",
     "createdAt": "2022-08-08T15:28:21.703Z",
     "createdBy": "3458764518372570852",
@@ -1570,8 +1568,7 @@
       "textAlign": "left",
       "textAlignVertical": "middle"
     },
-    "id": "3458764530866331361",
-    "parentId": "3458764530866331289",
+
     "origin": "center",
     "createdAt": "2022-08-08T15:28:21.703Z",
     "createdBy": "3458764518372570852",
@@ -1594,8 +1591,7 @@
       "textAlign": "center",
       "textAlignVertical": "middle"
     },
-    "id": "3458764530866331366",
-    "parentId": "3458764530866331289",
+
     "origin": "center",
     "createdAt": "2022-08-08T15:28:21.703Z",
     "createdBy": "3458764518372570852",
@@ -1700,4 +1696,6 @@
     "height": 205.714285714286,
     "rotation": 0
   }
+
+
 ]

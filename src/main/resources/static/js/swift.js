@@ -40,6 +40,21 @@ function updateCanvasLocation(canvasX, canvasY, data) {
 
 }
 
+async function sendWidget(widget) {
+    const widgetJson = JSON.stringify(widget)
+    console.log("Sending: ")
+    console.log(widgetJson)
+    const response = await fetch('swiftwidgets' , {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: widgetJson.toString()
+    })
+    console.log("I got a response: " + response)
+}
+
 async function processDrop(target, canvasX, canvasY) {
     // fetch("swiftwidgets/snapforms/").then((response) => {response.json().then((data) => {return updateCanvasLocation(canvasX,canvasY ,data)})})
     // let response = await fetch('swiftwidgets/snapforms/');
@@ -79,7 +94,18 @@ async function processDrop(target, canvasX, canvasY) {
             case "sticky_note":
                 console.log("This is a sticky_note!")
                 // console.log(currentElement)
-                const stick = miro.board.createStickyNote(currentElement)
+                // I can put a tag in here for each sticky
+                // const todo = await miro.board.createTag({
+                //     title: 'todo or not todo, that is the question',
+                //     color: 'yellow',
+                // });
+                const stick =  await miro.board.createStickyNote(currentElement)
+
+                // if (zoomTarget) {
+                //     zoomTarget.add(stick)
+                // }
+                // Send the widget to the server
+                sendWidget(stick)
                 break;
             case "shape":
                 console.log("This is a shape!")
@@ -104,6 +130,7 @@ async function processDrop(target, canvasX, canvasY) {
             default:
                 console.log("No friggen clue! " + currentElement["type"])
                 break;
+
         }
 
     }
