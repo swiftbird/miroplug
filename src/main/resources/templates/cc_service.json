@@ -1,0 +1,24 @@
+[
+  {
+    "type": "sticky_note",
+    "shape": "square",
+    "content": "<p>Service One</p>",
+    "style": {
+      "fillColor": "light_blue",
+      "textAlign": "center",
+      "textAlignVertical": "middle"
+    },
+    "tagIds": [],
+    "id": "3458764543694670458",
+    "parentId": null,
+    "origin": "center",
+    "createdAt": "2023-01-19T00:16:14.327Z",
+    "createdBy": "3458764518372570852",
+    "modifiedAt": "2023-01-19T00:29:32.997Z",
+    "modifiedBy": "3458764518372570852",
+    "x": -181579.6939614332,
+    "y": 495966.68458654213,
+    "width": 212.93,
+    "height": 243.96
+  }
+]

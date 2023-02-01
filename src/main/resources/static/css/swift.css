@@ -1240,3 +1240,7 @@ img, video {
 .draggable-item.green {
     background-color: #0ca788;
 }
+
+.accordion-scrollable {
+    overflow: scroll;
+}

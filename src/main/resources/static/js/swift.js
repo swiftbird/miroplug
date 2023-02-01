@@ -44,7 +44,7 @@ async function sendWidget(widget) {
     const widgetJson = JSON.stringify(widget)
     console.log("Sending: ")
     console.log(widgetJson)
-    const response = await fetch('swiftwidgets' , {
+    const response = await fetch('swiftwidgets', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -89,7 +89,12 @@ async function processDrop(target, canvasX, canvasY) {
                 break;
             case "card":
                 console.log("This is a card!")
-                miro.board.createCard(currentElement)
+                let card = await miro.board.createCard(currentElement)
+                // card.width = 600;
+                card.height = 800;
+                // card.rotation = -45;
+                await card.sync();
+                miro.board.viewport.zoomTo(card);
                 break;
             case "sticky_note":
                 console.log("This is a sticky_note!")
@@ -99,7 +104,7 @@ async function processDrop(target, canvasX, canvasY) {
                 //     title: 'todo or not todo, that is the question',
                 //     color: 'yellow',
                 // });
-                const stick =  await miro.board.createStickyNote(currentElement)
+                const stick = await miro.board.createStickyNote(currentElement)
 
                 // if (zoomTarget) {
                 //     zoomTarget.add(stick)
@@ -113,7 +118,8 @@ async function processDrop(target, canvasX, canvasY) {
                 break;
             case "image":
                 console.log("This is a image!")
-                miro.board.createImage(currentElement)
+                await miro.board.createImage(currentElement)
+                console.log("Image created")
                 break;
             case "preview":
                 console.log("This is a preview!")
@@ -122,6 +128,12 @@ async function processDrop(target, canvasX, canvasY) {
             case "tag":
                 console.log("This is a tag!")
                 miro.board.createTag(currentElement)
+                break;
+            case "connector":
+                console.log("This is a connector!")
+                const conn = await miro.board.createConnector(currentElement)
+                miro.board.viewport.zoomTo(conn);
+                console.log("connector created!")
                 break;
             case "embed":
                 console.log("This is an embed!")
@@ -156,14 +168,33 @@ async function init() {
         //     content: target.textContent,
         // });
     });
-    // Enable the 'icon:click' event on the app icon
-    // await miro.board.ui.on("icon:click", async () => {
-    //     // In this example: when the app icon is clicked, a method opens a panel
-    //     await miro.board.ui.openPanel({
-    //         // The content displayed on the panel is fetched from the specified HTML resource
-    //         url: "app.html"
-    //     });
+
+    // const todo = await miro.board.createTag({
+    //     title: 'todo-cuz-i-wanna',
+    //     color: 'yellow'
     // });
+    // console.log("Tag id: " + todo.id);
+
+
+    await miro.board.ui.on('selection:update', async (event) => {
+        console.log('Got a selection update event', event);
+        console.log(event.items);
+        const selectedItems = event.items;
+        console.log(JSON.stringify(event.items));
+        // Filter sticky notes from the selected items
+        const stickyNotes = selectedItems.filter((item) => item.type === 'sticky_note');
+        //
+        // for (const stickyNote of stickyNotes) {
+        //     stickyNote.tagIds.push(todo.id);
+        //     await stickyNote.sync();
+        // }
+
+
+    });
+
 }
 
-init();
+init().then(function oink(response) {
+
+    console.log('Swift Panel Initialized');
+});

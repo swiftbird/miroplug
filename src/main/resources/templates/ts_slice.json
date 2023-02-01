@@ -1,0 +1,17 @@
+[
+  {
+    "type": "card",
+    "title": "<p>General Description of the Slice</p>",
+    "description": "<p>This is the description of the thin slice and the sequence:</p><p><br /></p><p>1.</p><p>2.</p>",
+    "style": {
+      "cardTheme": "#94bfea"
+    },
+    "tagIds": [],
+
+    "x": 0,
+    "y": 0,
+    "width": 320,
+
+    "rotation": 0
+  }
+]

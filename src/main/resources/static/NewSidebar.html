@@ -9,7 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>
+<link rel="stylesheet" href="css/tw-elements.css"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <!--<script src="https://miro.com/app/static/sdk.1.1.js"></script>-->
 <script src="https://miro.com/app/static/sdk/v2/miro.js"></script>
@@ -29,7 +29,8 @@
 <!--<div class="miro-draggable">Drag</div>-->
 <!--<div class="miro-draggable">on</div>-->
 <!--<div class="miro-draggable">dragon</div>-->
-<div class="accordion" id="accordionExample" style="width: 340px;">
+<!-- Overview Section -->
+<div class="accordion" id="accordionExample" style="width: 340px; height: 800px; overflow: scroll;">
     <div class="flex divide-x justify-start divide-gray-200 p-2 items-center">
 
         <div class="pr-2 text-lg font-bold">
@@ -105,7 +106,7 @@
             </div>
         </div>
     </div>
-
+    <!-- Event Storming Section -->
     <div class="accordion-item bg-white border border-gray-200">
         <h2 class="accordion-header mb-0" id="headingTwo">
             <button class="
@@ -135,17 +136,17 @@
                      data-bs-toggle="tooltip" title="The full template">
 
                     <div class="shape flex flex-col items-center py-3">
-                        <img class="eventstormtemplate shape h-12 rounded" src="images/EventStormingTemplate.png"
+                        <img   class="eventstormtemplate shape h-12 rounded" src="images/EventStormingTemplate.png"
                              alt="ESTemplate">
                     </div>
                     <div class="flexHeader text-center text-gray-400 text-sm">Template</div>
                 </div>
-                <div id="es_event"
-                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                <div id="es_events"
+                     class="shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
                      data-bs-toggle="tooltip" title="Business Event">
 
-                    <div class="shape flex flex-col items-center py-3">
-                        <img class="businessevent shape h-8 rounded" src="images/BusinessEvent.png" alt="BusinessEvent">
+                    <div id="es_event" class="miro-draggable shape flex flex-col items-center py-3">
+                        <img  class="businessevent shape h-8 rounded" src="images/BusinessEvent.png" alt="BusinessEvent">
                     </div>
                     <div class="flexHeader text-center text-gray-400 text-sm">Business Event</div>
                 </div>
@@ -171,6 +172,7 @@
             </div>
         </div>
     </div>
+    <!-- Capabilites Section -->
     <div class="accordion-item bg-white border border-gray-200">
         <h2 class="accordion-header mb-0" id="headingThree">
             <button class="
@@ -195,21 +197,32 @@
 
             </button>
         </h2>
+
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
+                <div id="cc_template"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Capabilities Template">
 
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                    <div class=" shape flex flex-col items-center py-3">
+                        <img  class="shape h-8 rounded" src="images/Capabilities.png" alt="Capabilities">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Capabilities Template</div>
+                </div>
+                <div id="cc_service"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Service Candidate">
+
+                    <div class=" shape flex flex-col items-center py-3">
+                        <img  class="shape h-8 rounded" src="images/cc_service.png" alt="Service">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Service Candidate</div>
+                </div>
+
             </div>
         </div>
     </div>
-    <!-- -->
+    <!-- Thin Slice Section-->
     <div class="accordion-item bg-white border border-gray-200">
         <h2 class="accordion-header mb-0" id="headingFour">
             <button class="
@@ -237,19 +250,30 @@
         <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
         >
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
+                <div id="ts_template"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Thin Slice Template">
 
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                    <div class=" shape flex flex-col items-center py-3">
+                        <img  class="shape h-8 rounded" src="images/ThinSliceTemplate.png" alt="ThinSliceTemplate">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Thin Slice Template</div>
+                </div>
+                <div id="ts_slice"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Thin Slice">
+
+                    <div class=" shape flex flex-col items-center py-3">
+                        <img  class="shape h-8 rounded" src="images/ThinSlice.png" alt="ThinSlice">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Thin Slice</div>
+                </div>
+
             </div>
         </div>
     </div>
-    <!-- -->
+
+    <!-- Boris Section -->
 
     <div class="accordion-item bg-white border border-gray-200">
         <h2 class="accordion-header mb-0" id="headingFive">
@@ -278,18 +302,29 @@
         <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
         >
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+
+                <div id="boris_template"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Boris Template">
+
+                    <div class=" shape flex flex-col items-center py-3">
+                        <img class="shape h-8 rounded" src="images/BorisTemplate.png" alt="BorisTemplate">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Boris Template</div>
+                </div>
+                <div id="boris_service"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     data-bs-toggle="tooltip" title="Service / Capability">
+
+                    <div class=" shape flex flex-col items-center py-3">
+                        <img class="shape h-8 rounded" src="images/cc_service.png" alt="BorisService">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Service Candidate</div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Start Accordian -->
+    <!-- Start Accordion -->
 
     <div class="accordion-item bg-white border border-gray-200">
         <h2 class="accordion-header mb-0" id="heading6">
@@ -317,7 +352,8 @@
         >
             <div class="shape accordion-body py-4 px-5 grid grid-cols-3 gap-4">
 
-                <div id="fullsnap" class="shape bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                <div id="snap_template"
+                     class="miro-draggable shape bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
                      data-bs-toggle="tooltip" title="Create a blank Snap template">
                     <div class="shape">
                         <div class="shape flex flex-col items-center py-3">
@@ -327,8 +363,8 @@
                     </div>
                 </div>
 
-                <div id="swiftdoc"
-                     class="shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                <div id="snap_form"
+                     class="miro-draggable shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
                      data-bs-toggle="tooltip" title="Make a blank Snap form">
 
                     <div class="shape flex flex-col items-center py-3">
@@ -337,8 +373,8 @@
                     <div class="flexHeader text-center text-gray-400 text-sm">Snap Form</div>
                 </div>
 
-                <div id="snapdirectionscontainer"
-                     class="shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                <div id="snap_directions"
+                     class="shape miro-draggable bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
                      data-bs-toggle="tooltip" title="Make a blank Snap form">
 
                     <div class="shape flex flex-col items-center py-3">
@@ -433,7 +469,7 @@
                      data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
             </div>
         </div>
-    </div> <!-- End Accordian -->
+    </div> <!-- End Accordion -->
 </div>
 
 </body>
