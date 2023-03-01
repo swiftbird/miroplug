@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 <body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"/>
 <link rel="stylesheet" href="css/tw-elements.css"/>
@@ -14,9 +15,10 @@
 <!--<script src="https://miro.com/app/static/sdk.1.1.js"></script>-->
 <script src="https://miro.com/app/static/sdk/v2/miro.js"></script>
 <script src="js/swift.js"></script>
-
+<!--content: ['./src/**/*.{html,js}','./js/**/*{html,js}','./**/*.{html,js}','./**'],-->
 <script>
     tailwind.config = {
+
         theme: {
             extend: {
                 fontFamily: {
@@ -58,12 +60,12 @@
         rounded-none
         transition
         focus:outline-none
-      " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
+      " type="button" data-te-collapse-init data-te-target="#collapseOne" aria-expanded="false"
                     aria-controls="collapseOne">
                 Swift Overview
             </button>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
+        <div id="collapseOne" class="data-te-collapse-item data-te-collapse-show" aria-labelledby="headingOne">
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
                 <div id="ov_template"
                      class="miro-draggable shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
@@ -124,19 +126,19 @@
         rounded-none
         transition
         focus:outline-none
-      " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+      " type="button" data-te-collapse-init data-te-target="#collapseTwo" aria-expanded="false"
                     aria-controls="collapseTwo">
                 Event Storming
             </button>
         </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+        <div id="collapseTwo" class="data-te-collapse-item data-te-collapse-show" aria-labelledby="headingTwo">
             <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
                 <div id="es_template"
                      class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
                      data-bs-toggle="tooltip" title="The full template">
 
                     <div class="shape flex flex-col items-center py-3">
-                        <img   class="eventstormtemplate shape h-12 rounded" src="images/EventStormingTemplate.png"
+                        <img class="eventstormtemplate shape h-12 rounded" src="images/EventStormingTemplate.png"
                              alt="ESTemplate">
                     </div>
                     <div class="flexHeader text-center text-gray-400 text-sm">Template</div>
@@ -146,7 +148,7 @@
                      data-bs-toggle="tooltip" title="Business Event">
 
                     <div id="es_event" class="miro-draggable shape flex flex-col items-center py-3">
-                        <img  class="businessevent shape h-8 rounded" src="images/BusinessEvent.png" alt="BusinessEvent">
+                        <img class="businessevent shape h-8 rounded" src="images/BusinessEvent.png" alt="BusinessEvent">
                     </div>
                     <div class="flexHeader text-center text-gray-400 text-sm">Business Event</div>
                 </div>
@@ -190,7 +192,7 @@
         rounded-none
         transition
         focus:outline-none
-      " type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+      " type="button" data-te-collapse-init data-te-target="#collapseThree" aria-expanded="false"
                     aria-controls="collapseThree">
                 Capabilities and Candidates
 
@@ -198,34 +200,36 @@
             </button>
         </h2>
 
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
-            <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
-                <div id="cc_template"
-                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Capabilities Template">
+        <div id="collapseThree" class="data-te-collapse-item data-te-collapse-show aria-labelledby=" headingThree
+        ">
+        <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
+            <div id="cc_template"
+                 class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Capabilities Template">
 
-                    <div class=" shape flex flex-col items-center py-3">
-                        <img  class="shape h-8 rounded" src="images/Capabilities.png" alt="Capabilities">
-                    </div>
-                    <div class="flexHeader text-center text-gray-400 text-sm">Capabilities Template</div>
+                <div class=" shape flex flex-col items-center py-3">
+                    <img class="shape h-8 rounded" src="images/Capabilities.png" alt="Capabilities">
                 </div>
-                <div id="cc_service"
-                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Service Candidate">
-
-                    <div class=" shape flex flex-col items-center py-3">
-                        <img  class="shape h-8 rounded" src="images/cc_service.png" alt="Service">
-                    </div>
-                    <div class="flexHeader text-center text-gray-400 text-sm">Service Candidate</div>
-                </div>
-
+                <div class="flexHeader text-center text-gray-400 text-sm">Capabilities Template</div>
             </div>
+            <div id="cc_service"
+                 class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Service Candidate">
+
+                <div class=" shape flex flex-col items-center py-3">
+                    <img class="shape h-8 rounded" src="images/cc_service.png" alt="Service">
+                </div>
+                <div class="flexHeader text-center text-gray-400 text-sm">Service Candidate</div>
+            </div>
+
         </div>
     </div>
-    <!-- Thin Slice Section-->
-    <div class="accordion-item bg-white border border-gray-200">
-        <h2 class="accordion-header mb-0" id="headingFour">
-            <button class="
+</div>
+</div>
+<!-- Thin Slice Section-->
+<div class="accordion-item bg-white border border-gray-200">
+    <h2 class="accordion-header mb-0" id="headingFour">
+        <button class="
         accordion-button
         collapsed
         relative
@@ -240,237 +244,239 @@
         rounded-none
         transition
         focus:outline-none
-      " type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
-                    aria-controls="collapseFour">
-                Thin Slice
+      " type="button" data-te-collapse-init data-te-target="#collapseFour" aria-expanded="false"
+                aria-controls="collapseFour">
+            Thin Slice
 
 
-            </button>
-        </h2>
-        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-        >
-            <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
-                <div id="ts_template"
-                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Thin Slice Template">
+        </button>
+    </h2>
+    <div id="collapseFour" class="data-te-collapse-item data-te-collapse-show" aria-labelledby="headingFour"
+    >
+        <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
+            <div id="ts_template"
+                 class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Thin Slice Template">
 
-                    <div class=" shape flex flex-col items-center py-3">
-                        <img  class="shape h-8 rounded" src="images/ThinSliceTemplate.png" alt="ThinSliceTemplate">
-                    </div>
-                    <div class="flexHeader text-center text-gray-400 text-sm">Thin Slice Template</div>
+                <div class=" shape flex flex-col items-center py-3">
+                    <img class="shape h-8 rounded" src="images/ThinSliceTemplate.png" alt="ThinSliceTemplate">
                 </div>
-                <div id="ts_slice"
-                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Thin Slice">
-
-                    <div class=" shape flex flex-col items-center py-3">
-                        <img  class="shape h-8 rounded" src="images/ThinSlice.png" alt="ThinSlice">
-                    </div>
-                    <div class="flexHeader text-center text-gray-400 text-sm">Thin Slice</div>
-                </div>
-
+                <div class="flexHeader text-center text-gray-400 text-sm">Thin Slice Template</div>
             </div>
+            <div id="ts_slice"
+                 class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Thin Slice">
+
+                <div class=" shape flex flex-col items-center py-3">
+                    <img class="shape h-8 rounded" src="images/ThinSlice.png" alt="ThinSlice">
+                </div>
+                <div class="flexHeader text-center text-gray-400 text-sm">Thin Slice</div>
+            </div>
+
         </div>
     </div>
-
-    <!-- Boris Section -->
-
-    <div class="accordion-item bg-white border border-gray-200">
-        <h2 class="accordion-header mb-0" id="headingFive">
-            <button class="
-        accordion-button
-        collapsed
-        relative
-        flex
-        items-center
-        w-full
-        py-4
-        px-5
-        text-base text-gray-800 text-left
-        bg-white
-        border-0
-        rounded-none
-        transition
-        focus:outline-none
-      " type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
-                    aria-controls="collapseFive">
-                Boris
-
-
-            </button>
-        </h2>
-        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-        >
-            <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
-
-                <div id="boris_template"
-                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Boris Template">
-
-                    <div class=" shape flex flex-col items-center py-3">
-                        <img class="shape h-8 rounded" src="images/BorisTemplate.png" alt="BorisTemplate">
-                    </div>
-                    <div class="flexHeader text-center text-gray-400 text-sm">Boris Template</div>
-                </div>
-                <div id="boris_service"
-                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Service / Capability">
-
-                    <div class=" shape flex flex-col items-center py-3">
-                        <img class="shape h-8 rounded" src="images/cc_service.png" alt="BorisService">
-                    </div>
-                    <div class="flexHeader text-center text-gray-400 text-sm">Service Candidate</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Start Accordion -->
-
-    <div class="accordion-item bg-white border border-gray-200">
-        <h2 class="accordion-header mb-0" id="heading6">
-            <button class="
-        accordion-button
-        collapsed
-        relative
-        flex
-        items-center
-        w-full
-        py-4
-        px-5
-        text-base text-gray-800 text-left
-        bg-white
-        border-0
-        rounded-none
-        transition
-        focus:outline-none
-      " type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false"
-                    aria-controls="collapse6">
-                Snap
-            </button>
-        </h2>
-        <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6"
-        >
-            <div class="shape accordion-body py-4 px-5 grid grid-cols-3 gap-4">
-
-                <div id="snap_template"
-                     class="miro-draggable shape bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Create a blank Snap template">
-                    <div class="shape">
-                        <div class="shape flex flex-col items-center py-3">
-                            <img class="snapfull h-12 rounded" src="images/snaptemplate.png" alt="SnapPillar">
-                        </div>
-                        <div class="flexHeader text-center text-gray-400 text-sm">Template</div>
-                    </div>
-                </div>
-
-                <div id="snap_form"
-                     class="miro-draggable shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Make a blank Snap form">
-
-                    <div class="shape flex flex-col items-center py-3">
-                        <img class="shape h-12 rounded" src="images/snapdoc.png" alt="Snap">
-                    </div>
-                    <div class="flexHeader text-center text-gray-400 text-sm">Snap Form</div>
-                </div>
-
-                <div id="snap_directions"
-                     class="shape miro-draggable bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Make a blank Snap form">
-
-                    <div class="shape flex flex-col items-center py-3">
-                        <img class="snapdirections shape h-12 rounded" src="images/BorisDirections.png" alt="BorisDir">
-                    </div>
-                    <div class="flexHeader text-center text-gray-400 text-sm">Directions</div>
-                </div>
-
-
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-            </div>
-        </div>
-    </div>
-    <!-- End Accordian -->
-    <!-- Start Accordian -->
-
-    <div class="accordion-item bg-white border border-gray-200">
-        <h2 class="accordion-header mb-0" id="heading7">
-            <button class="
-        accordion-button
-        collapsed
-        relative
-        flex
-        items-center
-        w-full
-        py-4
-        px-5
-        text-base text-gray-800 text-left
-        bg-white
-        border-0
-        rounded-none
-        transition
-        focus:outline-none
-      " type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false"
-                    aria-controls="collapse7">
-                Patterns
-            </button>
-        </h2>
-        <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="heading7"
-        >
-            <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
-
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-            </div>
-        </div>
-    </div> <!-- End Accordian -->
-    <!-- Start Accordian -->
-
-    <div class="accordion-item bg-white border border-gray-200">
-        <h2 class="accordion-header mb-0" id="heading8">
-            <button class="
-        accordion-button
-        collapsed
-        relative
-        flex
-        items-center
-        w-full
-        py-4
-        px-5
-        text-base text-gray-800 text-left
-        bg-white
-        border-0
-        rounded-none
-        transition
-        focus:outline-none
-      " type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false"
-                    aria-controls="collapse8">
-                Accelerators
-            </button>
-        </h2>
-        <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="heading8"
-        >
-            <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
-
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-            </div>
-        </div>
-    </div> <!-- End Accordion -->
 </div>
 
+<!-- Boris Section -->
+
+<div class="accordion-item bg-white border border-gray-200">
+    <h2 class="accordion-header mb-0" id="headingFive">
+        <button class="
+        accordion-button
+        collapsed
+        relative
+        flex
+        items-center
+        w-full
+        py-4
+        px-5
+        text-base text-gray-800 text-left
+        bg-white
+        border-0
+        rounded-none
+        transition
+        focus:outline-none
+      " type="button" data-te-collapse-init data-te-target="#collapseFive" aria-expanded="false"
+                aria-controls="collapseFive">
+            Boris
+
+
+        </button>
+    </h2>
+    <div id="collapseFive" class="data-te-collapse-item data-te-collapse-show" aria-labelledby="headingFive"
+    >
+        <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
+
+            <div id="boris_template"
+                 class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Boris Template">
+
+                <div class=" shape flex flex-col items-center py-3">
+                    <img class="shape h-8 rounded" src="images/BorisTemplate.png" alt="BorisTemplate">
+                </div>
+                <div class="flexHeader text-center text-gray-400 text-sm">Boris Template</div>
+            </div>
+            <div id="boris_service"
+                 class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Service / Capability">
+
+                <div class=" shape flex flex-col items-center py-3">
+                    <img class="shape h-8 rounded" src="images/cc_service.png" alt="BorisService">
+                </div>
+                <div class="flexHeader text-center text-gray-400 text-sm">Service Candidate</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Start Accordion -->
+
+<div class="accordion-item bg-white border border-gray-200">
+    <h2 class="accordion-header mb-0" id="heading6">
+        <button class="
+        accordion-button
+        collapsed
+        relative
+        flex
+        items-center
+        w-full
+        py-4
+        px-5
+        text-base text-gray-800 text-left
+        bg-white
+        border-0
+        rounded-none
+        transition
+        focus:outline-none
+      " type="button" data-te-collapse-init data-te-target="#collapse6" aria-expanded="false"
+                aria-controls="collapse6">
+            Snap
+        </button>
+    </h2>
+    <div id="collapse6" class="data-te-collapse-item data-te-collapse-show" aria-labelledby="heading6"
+    >
+        <div class="shape accordion-body py-4 px-5 grid grid-cols-3 gap-4">
+
+            <div id="snap_template"
+                 class="miro-draggable shape bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Create a blank Snap template">
+                <div class="shape">
+                    <div class="shape flex flex-col items-center py-3">
+                        <img class="snapfull h-12 rounded" src="images/snaptemplate.png" alt="SnapPillar">
+                    </div>
+                    <div class="flexHeader text-center text-gray-400 text-sm">Template</div>
+                </div>
+            </div>
+
+            <div id="snap_form"
+                 class="miro-draggable shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Make a blank Snap form">
+
+                <div class="shape flex flex-col items-center py-3">
+                    <img class="shape h-12 rounded" src="images/snapdoc.png" alt="Snap">
+                </div>
+                <div class="flexHeader text-center text-gray-400 text-sm">Snap Form</div>
+            </div>
+
+            <div id="snap_directions"
+                 class="shape miro-draggable bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Make a blank Snap form">
+
+                <div class="shape flex flex-col items-center py-3">
+                    <img class="snapdirections shape h-12 rounded" src="images/BorisDirections.png" alt="BorisDir">
+                </div>
+                <div class="flexHeader text-center text-gray-400 text-sm">Directions</div>
+            </div>
+
+
+            <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+            <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+        </div>
+    </div>
+</div>
+<!-- End Accordian -->
+<!-- Start Accordian -->
+
+<div class="accordion-item bg-white border border-gray-200">
+    <h2 class="accordion-header mb-0" id="heading7">
+        <button class="
+        accordion-button
+        collapsed
+        relative
+        flex
+        items-center
+        w-full
+        py-4
+        px-5
+        text-base text-gray-800 text-left
+        bg-white
+        border-0
+        rounded-none
+        transition
+        focus:outline-none
+      " type="button" data-te-collapse-init data-te-target="#collapse7" aria-expanded="false"
+                aria-controls="collapse7">
+            Patterns
+        </button>
+    </h2>
+    <div id="collapse7" class="data-te-collapse-item data-te-collapse-show" aria-labelledby="heading7"
+    >
+        <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
+
+            <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+            <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+            <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+            <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+        </div>
+    </div>
+</div> <!-- End Accordian -->
+<!-- Start Accordian -->
+
+<div class="accordion-item bg-white border border-gray-200">
+    <h2 class="accordion-header mb-0" id="heading8">
+        <button class="
+        accordion-button
+        collapsed
+        relative
+        flex
+        items-center
+        w-full
+        py-4
+        px-5
+        text-base text-gray-800 text-left
+        bg-white
+        border-0
+        rounded-none
+        transition
+        focus:outline-none
+      " type="button" data-te-collapse-init data-te-target="#collapse8" aria-expanded="false"
+                aria-controls="collapse8">
+            Accelerators
+        </button>
+    </h2>
+    <div id="collapse8" class="data-te-collapse-item data-te-collapse-show" aria-labelledby="heading8"
+    >
+        <div class="accordion-body py-4 px-5 grid grid-cols-3 gap-4">
+
+            <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+            <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+            <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+            <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                 data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+        </div>
+    </div>
+</div> <!-- End Accordion -->
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </body>
 </html>

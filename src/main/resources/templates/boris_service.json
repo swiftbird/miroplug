@@ -1,0 +1,25 @@
+[
+  {
+    "type": "sticky_note",
+    "shape": "square",
+    "content": "<p><strong><u>strong and u</u></strong> Nothing</p><p><br></p><p><b>bold</b><p><i>italic?</p><p><s>This is s</s></p><p><h1>Something Else<h1></p><p><a href=\"http://localhost:3000\">GPT</a>",
+    "style": {
+      "fillColor": "light_blue",
+      "textAlign": "left",
+
+      "textAlignVertical": "middle"
+    },
+    "tagIds": [],
+
+    "parentId": null,
+    "origin": "center",
+    "createdAt": "2023-02-09T00:19:18.275Z",
+    "createdBy": "3458764518372570852",
+    "modifiedAt": "2023-02-09T00:21:17.016Z",
+    "modifiedBy": "3458764518372570852",
+    "x": -29871.53444886064,
+    "y": 139438.49763520106,
+    "width": 212.93,
+    "height": 243.96
+  }
+]
