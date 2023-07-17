@@ -2,7 +2,9 @@ package swiftbird.us.miroplug.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import swiftbird.us.miroplug.service.CodeGenService;
 import swiftbird.us.miroplug.service.MiroPlugService;
+
 
 import javax.annotation.Resource;
 
@@ -13,10 +15,21 @@ public class MiroController {
     @Autowired
     MiroPlugService service;
 
+    @Autowired
+    CodeGenService codeGenService;
+
     @GetMapping(value = "/graphs")
     @ResponseBody
     public String getAll() {
         return "You did it";
+
+    }
+
+    @PostMapping(value = "/snippets")
+    @ResponseBody
+    public String generateCode(@RequestBody String snape) {
+
+        return codeGenService.genCode(snape);
 
     }
 
@@ -29,8 +42,11 @@ public class MiroController {
     @PostMapping(value = "/swiftwidgets")
     @ResponseBody
     public String saveWidget(@RequestBody String widget) {
+
+        // This is the key to the reformatting
         System.out.println("Got a widget: " + widget);
-        return widget;
+
+        return service.formatGraph(widget);
     }
 
     @GetMapping(value = "/swiftwidgets/snapforms/")

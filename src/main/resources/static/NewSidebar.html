@@ -15,6 +15,7 @@
 <!--<script src="https://miro.com/app/static/sdk.1.1.js"></script>-->
 <script src="https://miro.com/app/static/sdk/v2/miro.js"></script>
 <script src="js/swift.js"></script>
+
 <!--content: ['./src/**/*.{html,js}','./js/**/*{html,js}','./**/*.{html,js}','./**'],-->
 <script>
     tailwind.config = {
@@ -369,7 +370,7 @@
             <div class="shape accordion-body py-4 px-5 grid grid-cols-3 gap-4">
 
                 <div id="snap_template"
-                     class="miro-draggable shape bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
                      data-bs-toggle="tooltip" title="Create a blank Snap template">
                     <div class="shape">
                         <div class="shape flex flex-col items-center py-3">
@@ -380,7 +381,7 @@
                 </div>
 
                 <div id="snap_form"
-                     class="miro-draggable shape bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     class="miro-draggable shape bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
                      data-bs-toggle="tooltip" title="Make a blank Snap form">
 
                     <div class="shape flex flex-col items-center py-3">
@@ -390,7 +391,7 @@
                 </div>
 
                 <div id="snap_directions"
-                     class="shape miro-draggable bg-gray-200 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
+                     class="shape miro-draggable bg-gray-50 w-24 h-24 items-center rounded shadow-md hover:opacity-50 cursor-pointer"
                      data-bs-toggle="tooltip" title="Make a blank Snap form">
 
                     <div class="shape flex flex-col items-center py-3">
@@ -399,12 +400,6 @@
                     </div>
                     <div class="flexHeader text-center text-gray-400 text-sm">Directions</div>
                 </div>
-
-
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
-                <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
             </div>
         </div>
     </div>
@@ -484,15 +479,28 @@
                 <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
                      data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
                 <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                     data-bs-toggle="tooltip" title="Hi! I'm tooltip">
+                    <button id="save-boris-btn" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                        <span>Save Boris</span>
+                    </button>
+                </div>
                 <div class="bg-gray-200 w-24 h-24 rounded shadow-md hover:opacity-50 cursor-pointer"
-                     data-bs-toggle="tooltip" title="Hi! I'm tooltip"></div>
+                     data-bs-toggle="tooltip" title="Make a 3D fly-through">
+                    <button id="space-port-btn" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                        <span>Space Port</span>
+                    </button>
+
+                </div>
+                <button id="fix-boris-btn" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                   <span>Fix Boris</span>
+                </button>
             </div>
         </div>
     </div>
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>-->
+<script src="./node_modules/tw-elements/dist/js/index.min.js"></script>
 </body>
 </html>

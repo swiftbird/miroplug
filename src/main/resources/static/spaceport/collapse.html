@@ -1,0 +1,116 @@
+<head>
+    <style> body {
+            margin: 0;
+        } </style>
+
+    <script src="//unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/neo4j-driver"></script>
+    <!--<script src="../../dist/3d-force-graph.js"></script>-->
+</head>
+
+<body>
+<div id="3d-graph"></div>
+
+<script>
+    const rootId = 0;
+
+    // // Random tree
+    // const N = 300;
+    // const gData = {
+    //     nodes: [...Array(N).keys()].map(i => ({ id: i, collapsed: i !== rootId, childLinks: [] })),
+    //     links: [...Array(N).keys()]
+    //         .filter(id => id)
+    //         .map(id => ({
+    //             source: Math.round(Math.random() * (id - 1)),
+    //             target: id
+    //         }))
+    // };
+
+    const driver = neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "Inoke"), {encrypted: false});
+    const start = new Date()
+    const session = driver.session();
+    session
+        .run('MATCH (n)-[r]->(m) RETURN { id: id(n), label:head(labels(n)), ' +
+            'caption:n.name} as source, {id: id(m), label:head(labels(m)), caption:m.name} as target, ' +
+            '{ type:type(r)} as rel  LIMIT $limit', {limit: neo4j.int(10)})
+        .then(function (result) {
+            const nodes = {}
+            const links = result.records.map(r => {
+                var source = r.get('source');
+                source.id = source.id.toNumber();
+                source.pig = 'donkey';
+                source.neighbors = [];
+                source.links = [];
+                nodes[source.id] = source;
+
+                // console.log(source.label);
+                if (source.label == 'Application') {
+                    console.log("I have an application");
+                    source.size = 50;
+                }
+                if (source.label == 'Declaration') {
+                    console.log("I have a Declaration");
+                    // source.size = 25;
+                }
+                if (source.label == 'SourceModel') {
+                    console.log("I have a SourceModel");
+                    // source.size = 30;
+                }
+                var target = r.get('target');
+                target.id = target.id.toNumber();
+                nodes[target.id] = target;
+                target.pig = 'llama';
+                target.neighbors = [];
+                target.links = [];
+
+                var rel = r.get('rel');
+                source.links.push(r);
+                target.links.push(r);
+                source.neighbors.push(target);
+                target.neighbors.push(source);
+
+                return Object.assign({source: source.id, target: target.id}, rel);
+            });
+
+            session.close();
+            console.log(links.length + " links loaded in " + (new Date() - start) + " ms.")
+            const gData = {nodes: Object.values(nodes), links: links}
+
+            // // link parent/children
+            const nodesById = Object.fromEntries(gData.nodes.map(node => [node.id, node]));
+            gData.links.forEach(link => {
+                nodesById[link.source].links.push(link);
+            });
+
+            const getPrunedTree = () => {
+                const visibleNodes = [];
+                const visibleLinks = [];
+
+                (function traverseTree(node = nodesById[rootId]) {
+                    visibleNodes.push(node);
+                    if (node.collapsed) return;
+                    visibleLinks.push(...node.links);
+                    node.links
+                        .map(link => ((typeof link.target) === 'object') ? link.target : nodesById[link.target]) // get child node
+                        .forEach(traverseTree);
+                })(); // IIFE
+
+                return {nodes: visibleNodes, links: visibleLinks};
+            };
+
+            const elem = document.getElementById('3d-graph');
+            const Graph = ForceGraph3D()(elem)
+                .graphData(getPrunedTree())
+                .linkDirectionalParticles(2)
+                .nodeColor(node => !node.links.length ? 'green' : node.collapsed ? 'red' : 'yellow')
+                .onNodeHover(node => elem.style.cursor = node && node.links.length ? 'pointer' : null)
+                .onNodeClick(node => {
+                    if (node.links.length) {
+                        node.collapsed = !node.collapsed; // toggle collapse state
+                        Graph.graphData(getPrunedTree());
+                    }
+                });
+
+        });
+</script>
+</body>

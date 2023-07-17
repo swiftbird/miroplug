@@ -1,0 +1,19 @@
+{
+  "edges": [
+    { "edgeId": "ClassMethod:src.main.java.io.sntl.SntlServerApplication.main->MethodParm:paramArrayOfString", "label": "HAS_PARAMETER", "source": "ClassMethod:src.main.java.io.sntl.SntlServerApplication.main", "target": "MethodParm:paramArrayOfString" },
+    { "edgeId": "Declaration:SntlServerApplication->ClassMethod:src.main.java.io.sntl.SntlServerApplication.main", "label": "DECLARES", "source": "Declaration:SntlServerApplication", "target": "ClassMethod:src.main.java.io.sntl.SntlServerApplication.main" },
+    { "edgeId": "SourceModel:.Users.shaunanderson.Development.snarky.emu.io.sntl.services.SntlServerApplication.class->Import:SpringBootApplication", "label": "IMPORTS", "source": "SourceModel:.Users.shaunanderson.Development.snarky.emu.io.sntl.services.SntlServerApplication.class", "target": "Import:SpringBootApplication" },
+    { "edgeId": "SourceModel:.Users.shaunanderson.Development.snarky.emu.io.sntl.services.SntlServerApplication.class->Import:String", "label": "IMPORTS", "source": "SourceModel:.Users.shaunanderson.Development.snarky.emu.io.sntl.services.SntlServerApplication.class", "target": "Import:String" },
+    { "edgeId": "Application:HappyPig->SourceModel:.Users.shaunanderson.Development.snarky.emu.io.sntl.services.SntlServerApplication.class", "label": "CONSISTS_OF", "source": "Application:HappyPig", "target": "SourceModel:.Users.shaunanderson.Development.snarky.emu.io.sntl.services.SntlServerApplication.class" },
+    { "edgeId": "SourceModel:.Users.shaunanderson.Development.snarky.emu.io.sntl.services.SntlServerApplication.class->Declaration:SntlServerApplication", "label": "CONTAINS", "source": "SourceModel:.Users.shaunanderson.Development.snarky.emu.io.sntl.services.SntlServerApplication.class", "target": "Declaration:SntlServerApplication" }
+  ],
+  "nodes": [
+    { "location": [ 54.630742727780124, -2.872913514241388, 0.0 ], "name": "SpringBootApplication", "nodeId": "Import:SpringBootApplication", "nodeType": "Import" },
+    { "location": [ 27.47603006761913, -32.95838394114831, 0.0 ], "name": "String", "nodeId": "Import:String", "nodeType": "Import" },
+    { "annotations": [], "comment": "", "isVarArgs": false, "location": [ -76.91335752151625, 4.46515022522041, 0.0 ], "modifiers": [], "name": "paramArrayOfString", "nodeId": "MethodParm:paramArrayOfString", "nodeType": "MethodParm", "type": "String[]", "varArgsAnnotations": [] },
+    { "annotations": [], "comment": "", "location": [ -47.33691913381918, 3.312330160069377, 0.0 ], "methodSignature": "src.main.java.io.sntl.SntlServerApplication.main", "modifiers": [ "public ", "static " ], "name": "main", "nodeId": "ClassMethod:src.main.java.io.sntl.SntlServerApplication.main", "nodeType": "ClassMethod", "returnType": "void", "thrownExceptions": [] },
+    { "accessModifiers": [ "public " ], "annotations": [ "SpringBootApplication" ], "comment": "", "isInterface": false, "location": [ -13.710574834187067, 1.5286207501320601, 0.0 ], "name": "SntlServerApplication", "nodeId": "Declaration:SntlServerApplication", "nodeType": "Declaration" },
+    { "comment": "", "compilerVersion": "Java SE 8", "location": [ 22.882926295000985, -0.7356925477449593, 0.0 ], "name": ".Users.shaunanderson.Development.snarky.emu.io.sntl.services.SntlServerApplication.class", "namespace": "src.main.java.io.sntl", "nodeId": "SourceModel:.Users.shaunanderson.Development.snarky.emu.io.sntl.services.SntlServerApplication.class", "nodeType": "SourceModel", "scanDate": "2021-10-20T12:20:08.982-0600" },
+    { "discoveredOnComponent": "./", "location": [ 31.707086810435893, 30.611974238025926, 0.0 ], "name": "HappyPig", "nodeId": "Application:HappyPig", "nodeType": "Application", "runId": "Oink", "scanDate": "2021-10-20T12:20:08.964-0600" }
+  ]
+}

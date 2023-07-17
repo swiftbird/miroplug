@@ -1,0 +1,939 @@
+<head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style> body {
+        margin: 0;
+
+    } </style>
+
+    <style>
+        .column {
+            float: left;
+            width: 20%;
+            padding: 10px;
+            height: 100%;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .button1 {
+            background: white;
+            width: 100%;
+            alignment: left;
+            border: none;
+
+        }
+
+        /* Green */
+    </style>
+
+
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+
+    <!--    <script src="//unpkg.com/d3-dsv"></script>-->
+    <!--    <script src="//unpkg.com/dat.gui"></script>-->
+    <!--    <script src="//unpkg.com/d3-octree"></script>-->
+    <!--    <script src="//unpkg.com/d3-force-3d"></script>-->
+    <!--    <script src="//unpkg.com/3d-force-graph"></script>-->
+    <!--    <script src="https://unpkg.com/neo4j-driver"></script>-->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSAI Space Port</title>
+    <!-- loading jsPanel css -->
+    <!--    <link rel="stylesheet" href="dist/jspanel.css">-->
+
+
+</head>
+
+<!--<body style="background-color: #263238">-->
+<body style="background-color: #222">
+<!--<body>-->
+
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+<script src="//unpkg.com/d3-dsv"></script>
+<script src="//unpkg.com/dat.gui"></script>
+<script src="//unpkg.com/d3-octree"></script>
+
+<script src="//unpkg.com/three"></script>
+<script src="//unpkg.com/three-spritetext"></script>
+
+<script src="//unpkg.com/d3-force-3d"></script>
+<script src="//unpkg.com/3d-force-graph"></script>
+<script src="https://unpkg.com/neo4j-driver"></script>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">SpacePort</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Orientation
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">CSAi SpacePort</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+
+
+            <li class="active"><a href="#">Home</a></li>
+            <li id="orientation" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Orientation<span
+                    class="caret"></span></a>
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <button id="noneBtn" class="dropdown-item button1" type="button" onclick="borderIt(this)">None
+                        </button>
+                    </li>
+                    <li>
+                        <button id="td" class="dropdown-item button1 " type="button" onclick="borderIt(this)">Top Down
+                        </button>
+                    </li>
+                    <li>
+                        <button id="bu" class="dropdown-item button1" type="button" onclick="borderIt(this)">Bottom Up
+                        </button>
+                    </li>
+                    <li>
+                        <button id="lr" class="dropdown-item button1" type="button" onclick="borderIt(this)">Left ->
+                            Right
+                        </button>
+                    </li>
+                    <li>
+                        <button id="rl" class="dropdown-item button1" type="button" onclick="borderIt(this)">Right ->
+                            Left
+                        </button>
+                    </li>
+                    <li>
+                        <button id="zin" class="dropdown-item button1" type="button" onclick="borderIt(this)">Z In
+                        </button>
+                    </li>
+                    <li>
+                        <button id="zout" class="dropdown-item button1" type="button" onclick="borderIt(this)">Z Out
+                        </button>
+                    </li>
+                    <li>
+                        <button id="radialin" class="dropdown-item button1" type="button" onclick="borderIt(this)">
+                            Radial In
+                        </button>
+                    </li>
+                    <li>
+                        <button id="radialout" class="dropdown-item button1" type="button" onclick="borderIt(this)">
+                            Radial Out
+                        </button>
+                    </li>
+                </ul>
+            </li>
+
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!--<div class="container-fluid" style="background-color: #222222">-->
+<!--<div class="row">-->
+<!--        <div class="column" style="background-color:#aaa;">-->
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="column">
+            <div class="panel">
+                <div id="panel-heading" class="panel-heading" style="background-color: #222222; color: whitesmoke">Panel
+                    Heading
+                </div>
+                <div id="panel-body" class="panel-body" style="background-color: #222222; color: whitesmoke">Panel
+                    Content
+                </div>
+            </div>
+
+        </div>
+        <div class="column">
+            <!--        <div class="container-fluid">-->
+            <div id="3d-graph"></div>
+            <!--        </div>-->
+        </div>
+    </div>
+
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <!--            <a class="navbar-brand" href="#">Fixed bottom</a>-->
+        <button class=" navbar-brand navbar-inverse btn " onclick="resetCamera()">Reset View</button>
+        <ul class nav navbar-nav navbar-left>
+            <li>
+                <!--                <<a href="#">Inbox <span class="badge">42</span></a>-->
+
+                <!--                <button class="btn btn-primary" type="button">-->
+                <!--                    Messages <span class="badge">4</span>-->
+                <!--                </button>-->
+
+                <button id="applicationBtn" class="btn btn-primary" type="button">
+
+                    Application <span id="appCount" class="badge"></span>
+                </button>
+                <button id="hostBtn" class="btn btn-primary" type="button">
+                    Host <span id="hostCount" class="badge"></span>
+                </button>
+
+                <button id="runtimeBtn" class="btn btn-primary" type="button">
+                    RuntimeEnv <span id="runtimeCount" class="badge"></span>
+                </button>
+                <button id="bundleBtn" class="btn btn-primary" type="button">
+                    Bundle <span id="bundleCount" class="badge"></span>
+                </button>
+
+                <button id="declarationBtn" class="btn btn-primary" type="button">
+                    Declaration <span id="decCount" class="badge"></span>
+                </button>
+                <button id="sourceModelBtn" class="btn btn-primary" type="button">
+                    SourceModel <span id="sourceCount" class="badge"></span>
+                </button>
+                <button id="invocationBtn" class="btn btn-primary" type="button">
+                    Invocation <span id="invoCount" class="badge"></span>
+                </button>
+                <button id="importBtn" class="btn btn-primary" type="button">
+                    Import <span id="importCount" class="badge"></span>
+                </button>
+                <button id="variableBtn" class="btn btn-primary" type="button">
+                    Variable <span id="varCount" class="badge"></span>
+                </button>
+                <button id="methodBtn" class="btn btn-primary" type="button">
+                    Method <span id="methodCount" class="badge"></span>
+                </button>
+                <button id="methodParmBtn" class="btn btn-primary" type="button">
+                    MethodParm <span id="parmCount" class="badge"></span>
+                </button>
+                <button id="buildBtn" class="btn btn-primary" type="button">
+                    Build <span id="buildCount" class="badge"></span>
+                </button>
+                <button id="deploymentBtn" class="btn btn-primary" type="button">
+                    Deployment <span id="deploymentCount" class="badge"></span>
+                </button>
+                <button id="artifactBtn" class="btn btn-primary" type="button"
+                        onclick="removeNodeTypes('Artifact')">
+                    Artifact <span id="artifactCount" class="badge"></span>
+                </button>
+            </li>
+
+        </ul>
+        <!--        <ul class="nav navbar-nav navbar-right">-->
+        <!--            <li><a href="#"><span class="glyphicon glyphicon-plus-sign"></span> Application</a></li>-->
+        <!--            <li><a href="#"><span class="glyphicon glyphicon-minus-sign"></span> Method</a></li>-->
+        <!--        </ul>-->
+    </div>
+
+</nav>
+
+
+<script>
+    console.log("als;kjfaslkjfsalkdjfsalkjflsadkfjlsa;kfjls;adfjksal;dfjk");
+
+
+    const elem = document.getElementById("3d-graph");
+    const bod = document.getElementById("panel-body");
+    const head = document.getElementById("panel-heading");
+
+    function loadIt() {
+        console.log('Imma try load it');
+        fetch('../spaceport/graphs').then(r => r.json()).then(data => {
+            data.forEach(node => {
+                console.log("oinky: " + node.rel.id);
+                node.name = `${node.source}:${node.rel}`;
+                //
+                Graph
+                    .cooldownTicks(200)
+                    .nodeLabel('id')
+                    .nodeAutoColorBy('group')
+                    .forceEngine('ngraph')
+                    .graphData(data);
+            });
+        });
+    }
+
+    loadIt();
+    const Graph = ForceGraph3D()(elem);
+
+
+    // const Graph = ForceGraph3D()(elem)
+    //     // .enableNodeDrag(true)
+    //     // .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
+    //     .dagMode(null)
+    //     .dagLevelDistance(200)
+    //     .d3Force('collision', d3.forceCollide(node => Math.cbrt(node.size) * NODE_REL_SIZE))
+    //     .d3VelocityDecay(0.3)
+    //
+    //     // .showNavInfo(true)
+    //
+    //     .onNodeHover(node => {
+    //
+    //         // no state change
+    //         if ((!node && !highlightNodes.size) || (node && hoverNode === node)) return;
+    //
+    //         clearHighLightedNodes();
+    //
+    //         highlightNodes.clear();
+    //         highlightLinks.clear();
+    //         if (node) {
+    //             console.log("I am hovering on a node " + node.caption);
+    //             highlightNodes.add(node);
+    //             node.neighbors.forEach(neighbor => highlightNodes.add(neighbor));
+    //             node.links.forEach(link => highlightLinks.add(link));
+    //         }
+    //
+    //         hoverNode = node || null;
+    //
+    //         updateHighlight();
+    //     })
+    //     .onNodeRightClick(removeNode)
+    //     .onNodeClick(updatePanel)
+    //     .nodeAutoColorBy('label')
+    //     // .nodeColor(d => d.label=="Application" ? '#4caf50' : '#f44336')
+    //     .nodeColor(d => getColor(d.label))
+    //     .nodeVal('size')
+    //     .onNodeDragEnd(node => {
+    //         node.fx = node.x;
+    //         node.fy = node.y;
+    //         node.fz = node.z;
+    //     })
+    //     .nodeLabel(node => `${node.label}: ${node.caption}`)
+    //     .linkLabel(link => `${link.type}`)
+    //     .linkAutoColorBy('type')
+    //     .linkDirectionalArrowLength(3.5)
+    //     .linkDirectionalArrowRelPos(1)
+    //
+    //     // .nodeColor(node => highlightNodes.has(node) ? node === hoverNode ? 'rgb(255,0,0,1)' : 'rgba(255,160,0,0.8)' : 'rgba(0,255,255,0.6)')
+    //     .linkWidth(link => highlightLinks.has(link) ? 4 : 1)
+    //     .linkDirectionalParticles(link => highlightLinks.has(link) ? 4 : 0)
+    //     .linkDirectionalParticleWidth(4)
+    //     .onLinkHover(link => {
+    //
+    //         clearHighLightedNodes();
+    //
+    //         highlightNodes.clear();
+    //
+    //         highlightLinks.clear();
+    //
+    //         if (link) {
+    //             highlightLinks.add(link);
+    //             highlightNodes.add(link.source);
+    //             highlightNodes.add(link.target);
+    //
+    //         }
+    //
+    //         updateHighlight();
+    //     })
+    //
+    //
+    //     .graphData(gData);
+
+    // Sprite text on links
+    // Graph.linkThreeObjectExtend(true);
+    // Graph.linkThreeObject(link => {
+    //     if (highlightLinks.has(link)) {
+    //     }
+    //     // extend link with text sprite
+    //     const sprite = new SpriteText(`${link.type}`); // change this to invoke a function to determine the text
+    //     sprite.color = 'lightgrey';
+    //     sprite.textHeight = 1.5;
+    //     return sprite;
+    // })
+    //     .linkPositionUpdate((sprite, {start, end}) => {
+    //         const middlePos = Object.assign(...['x', 'y', 'z'].map(c => ({
+    //             [c]: start[c] + (end[c] - start[c]) / 2 // calc middle point
+    //         })));
+    //
+    //         // Position sprite
+    //         Object.assign(sprite.position, middlePos);
+    //     });
+
+    // Decrease repel intensity
+    Graph.d3Force('charge').strength(-15);
+
+    const start = new Date();
+
+    // const userAction = async () => {
+    //     const response = await fetch('../graphs');
+    //     const myJson = await response.json(); //extract JSON from the http response
+    //     // do something with myJson
+    //
+    //
+    //
+    // }
+    // userAction();
+
+
+    // const response =  fetch('http://localhost:8080/graphs');
+    // const myJson =  response.json(); //extract JSON from the http response
+    // // do something with myJson
+    //
+    // console.log(myJson);
+
+    // }
+
+    // session
+    //
+    //     .run('MATCH (n)-[r]->(m) RETURN n as source, r as rel, m as target ')
+    // fetch('../graphs')
+    //     .then(function (result) {
+    //
+    //         const nodes = {}
+    //         const links = result.records.map(r => {
+    //             var source = r.get('source');
+    //             console.log("Source: " + source);
+    //             console.log("Identity: " + source.identity);
+    //             console.log("Name: " + source.properties["name"]);
+    //             source.id = source.identity.toNumber();
+    //             source.caption = source.properties["name"];
+    //             for (const property in source.properties) {
+    //                 console.log(`${property}: ${source.properties[property]}`);
+    //             }
+    //             source.label = source.labels[0];
+    //
+    //             source.pig = 'donkey';
+    //             source.neighbors = [];
+    //             source.links = [];
+    //             nodes[source.id] = source;
+    //
+    //
+    //             var target = r.get('target');
+    //             target.id = target.identity.toNumber();
+    //             nodes[target.id] = target;
+    //             target.pig = 'llama';
+    //             target.neighbors = [];
+    //             target.links = [];
+    //             target.caption = target.properties["name"];
+    //             target.label = target.labels[0];
+    //
+    //             var rel = r.get('rel');
+    //             source.links.push(r);
+    //             target.links.push(r);
+    //             source.neighbors.push(target);
+    //             target.neighbors.push(source);
+    //
+    //             return Object.assign({source: source.id, target: target.id}, rel);
+    //         });
+    //
+    //         // session.close();
+    //         console.log(links.length + " links loaded in " + (new Date() - start) + " ms.");
+    //         const gData = {nodes: Object.values(nodes), links: links};
+    //
+    //         gData.nodes.forEach(source => {
+    //             // console.log(source.label);
+    //             if (source.label == 'Application') {
+    //                 console.log("I have an Application");
+    //                 appCount++;
+    //                 oink = document.getElementById("appCount");
+    //                 oink.innerText = appCount;
+    //                 applicationBtn = document.getElementById("applicationBtn");
+    //                 applicationBtn.style.backgroundColor = getColor("Application");
+    //                 applicationBtn.style.borderColor = getColor("Application");
+    //                 source.size = getSize(source.label);
+    //
+    //
+    //             }
+    //             if (source.label == 'Declaration') {
+    //                 console.log("I have a Declaration");
+    //                 decCount++;
+    //                 document.getElementById("decCount").innerText = decCount;
+    //                 declarationBtn = document.getElementById("declarationBtn");
+    //                 declarationBtn.style.backgroundColor = getColor("Declaration");
+    //                 declarationBtn.style.borderColor = getColor("Declaration");
+    //                 console.log("Size matters: " + source.size);
+    //                 source.size = getSize(source.label);
+    //             }
+    //             if (source.label == 'SourceModel') {
+    //                 console.log("I have a SourceModel");
+    //                 sourceCount++;
+    //                 document.getElementById("sourceCount").innerText = sourceCount;
+    //                 sourceModelBtn = document.getElementById("sourceModelBtn");
+    //                 sourceModelBtn.style.backgroundColor = getColor("SourceModel");
+    //                 sourceModelBtn.style.borderColor = getColor("SourceModel");
+    //                 source.size = getSize(source.label);
+    //             }
+    //             if (source.label == 'Variable') {
+    //                 console.log("I have a Variable");
+    //                 varCount++;
+    //                 document.getElementById("varCount").innerText = varCount;
+    //                 variablelBtn = document.getElementById("variableBtn");
+    //                 variablelBtn.style.backgroundColor = getColor("Variable");
+    //                 variablelBtn.style.borderColor = getColor("Variable");
+    //                 source.size = getSize(source.label);
+    //                 // source.size = 25;
+    //             }
+    //             if (source.label == 'Invocation') {
+    //                 console.log("I have a Invocation");
+    //                 invocationCount++;
+    //                 document.getElementById("invoCount").innerText = invocationCount;
+    //                 invocationBtn = document.getElementById("invocationBtn");
+    //                 invocationBtn.style.backgroundColor = getColor("Invocation");
+    //                 invocationBtn.style.borderColor = getColor("Invocation");
+    //                 source.size = getSize(source.label);
+    //             }
+    //             if (source.label == 'Import') {
+    //                 console.log("I have a Import");
+    //                 importCount++;
+    //                 document.getElementById("importCount").innerText = importCount;
+    //                 importBtn = document.getElementById("importBtn");
+    //                 importBtn.style.backgroundColor = getColor("Import");
+    //                 importBtn.style.borderColor = getColor("Import");
+    //                 source.size = getSize(source.label);
+    //             }
+    //             if (source.label == 'Method') {
+    //                 console.log("I have a Method");
+    //                 methodCount++;
+    //                 document.getElementById("methodCount").innerText = methodCount;
+    //                 methodBtn = document.getElementById("methodBtn");
+    //                 methodBtn.style.backgroundColor = getColor("Method");
+    //                 methodBtn.style.borderColor = getColor("Method");
+    //                 source.size = getSize(source.label);
+    //             }
+    //             if (source.label == 'MethodParm') {
+    //                 console.log("I have a MethodParm");
+    //                 methodParmCount++;
+    //                 document.getElementById("parmCount").innerText = methodParmCount.toString();
+    //                 methodParmBtn = document.getElementById("methodParmBtn");
+    //                 methodParmBtn.style.backgroundColor = getColor("MethodParm");
+    //                 methodParmBtn.style.borderColor = getColor("MethodParm");
+    //                 source.size = getSize(source.label);
+    //             }
+    //             if (source.label == 'Build') {
+    //                 console.log("I have a Build");
+    //                 buildCount++;
+    //                 document.getElementById("buildCount").innerText = buildCount.toString();
+    //                 buildBtn = document.getElementById("buildBtn");
+    //                 buildBtn.style.backgroundColor = getColor("Build");
+    //                 buildBtn.style.borderColor = getColor("Build");
+    //                 source.size = getSize(source.label);
+    //             }
+    //             if (source.label == 'Artifact') {
+    //                 console.log("I have an Artifact");
+    //                 artifactCount++;
+    //                 document.getElementById("artifactCount").innerText = artifactCount.toString();
+    //                 artifacBtn = document.getElementById("artifactBtn");
+    //                 artifacBtn.style.backgroundColor = getColor("Artifact");
+    //                 artifacBtn.style.borderColor = getColor("Artifact");
+    //                 source.size = getSize(source.label);
+    //             }
+    //             if (source.label == 'Deployment') {
+    //                 console.log("I have a Deployment");
+    //                 deploymentCount++;
+    //                 document.getElementById("deploymentCount").innerText = deploymentCount.toString();
+    //
+    //                 deploymentBtn = document.getElementById("deploymentBtn");
+    //                 deploymentBtn.style.backgroundColor = getColor("Deployment");
+    //                 deploymentBtn.style.borderColor = getColor("Deployment");
+    //                 source.size = getSize(source.label);
+    //             }
+    //             if (source.label == 'RuntimeEnv') {
+    //                 console.log("I have a RuntimeEnv");
+    //                 runtimeCount++;
+    //                 document.getElementById("runtimeCount").innerText = runtimeCount.toString();
+    //                 runtimeBtn = document.getElementById("runtimeBtn");
+    //                 runtimeBtn.style.backgroundColor = getColor("RuntimeEnv");
+    //                 runtimeBtn.style.borderColor = getColor("RuntimeEnv");
+    //                 source.size = getSize(source.label);
+    //             }
+    //             if (source.label == 'Host') {
+    //                 console.log("I have a Host");
+    //                 hostCount++;
+    //                 document.getElementById("hostCount").innerText = hostCount.toString();
+    //                 hostBtn = document.getElementById("hostBtn");
+    //                 hostBtn.style.backgroundColor = getColor("Host");
+    //                 hostBtn.style.borderColor = getColor("Host");
+    //                 source.size = getSize(source.label);
+    //             }
+    //             if (source.label == 'Bundle') {
+    //                 console.log("I have a Bundle");
+    //                 bundleCount++;
+    //                 document.getElementById("bundleCount").innerText = bundleCount.toString();
+    //                 bundleBtn = document.getElementById("bundleBtn");
+    //                 bundleBtn.style.backgroundColor = getColor("Bundle");
+    //                 bundleBtn.style.borderColor = getColor("Bundle");
+    //                 source.size = getSize(source.label);
+    //             }
+    //             // console.log("I have a " + source.label);
+    //         });
+    //         // cross-link node objects
+    //         gData.links.forEach(link => {
+    //             const a = gData.nodes[link.source];
+    //             const b = gData.nodes[link.target];
+    //             // It may be an incomplete graph because of limits
+    //             if ((a != null) && (b != null)) {
+    //
+    //                 // !a.neighbors && (a.neighbors = []);
+    //                 // !b.neighbors && (b.neighbors = []);
+    //                 a.neighbors.push(b);
+    //                 b.neighbors.push(a);
+    //
+    //                 // !a.links && (a.links = []);
+    //                 // !b.links && (b.links = []);
+    //                 a.links.push(link);
+    //                 b.links.push(link);
+    //             }
+    //
+    //         });
+    //         console.log("Crosslinked I thinked");
+    //
+    //         // gData = {nodes: Object.values(nodes), links: links};
+    //         initData.nodes = {nodes: Object.values(nodes)};
+    //         initData.links = links;
+    //         Graph.graphData(gData);
+    //     });
+
+    // let oink = Graph.graphData(gData);
+    // console.log("Here is the oink! " + oink.toString());
+
+
+    // setInterval(() => {
+    //     const {nodes, links} = Graph.graphData();
+    //     const id = nodes.length;
+    //     Graph.graphData({
+    //         nodes: [...nodes, {id}],
+    //         links: [...links, {source: id, target: Math.round(Math.random() * (id - 1))}]
+    //     });
+    // }, 1000);
+
+    initLabels();
+
+    function removeNode(node) {
+        let {nodes, links} = Graph.graphData();
+        links = links.filter(l => l.source !== node && l.target !== node); // Remove links attached to node
+        nodes.splice(node.id, 1); // Remove node
+        nodes.forEach((n, idx) => {
+            n.id = idx;
+        }); // Reset node ids to array index
+        Graph.graphData({nodes, links});
+    }
+
+    function collapseNode(node) {
+        let {nodes, links} = Graph.graphData();
+        node.collapsed = !node.collapsed;
+        Graph.graphData({nodes, links});
+    }
+
+    function updatePanel(node) {
+        console.log(node.caption);
+        // leftbar.contentRemove();
+        // leftbar.content.append(node.caption);
+        // leftbar.content.innerHTML += "<div>";
+        let content = "<table class=\"table\">\n" +
+            "  <thead>\n" +
+            "    <tr >\n" +
+
+            "      <th scope=\"col\">Property</th>\n" +
+            "      <th scope=\"col\">Value</th>\n" +
+
+            "    </tr>\n" +
+            "  </thead>\n" +
+            "  <tbody>\n";
+        for (const property in node.properties) {
+            // leftbar.content.append(`${property}: ${node.properties[property]}`);
+            // let line = `${property}: ${node.properties[property]}`;
+            let line = "<tr>\n" +
+                // "      <th scope=\"row\">Property</th>\n" +
+                "      <td >" + `${property}` + "</td>\n" +
+                "      <td >" + `${node.properties[property]}` + "</td>\n" +
+
+                "    </tr>\n";
+            // leftbar.content.innerHTML += "<p class=\"text-sm\">" + line + "</p>";
+            // leftbar.content.innerHTML += "<p padding=\"20px\">" + line + "</p>";
+            content += line + "\n";
+
+        }
+
+        content += "</tbody>\n" +
+            "</table>";
+
+
+        // leftbar.content.innerHTML += "</div>"
+        // leftbar.setHeaderTitle(node.label);
+        // collapseNode(node);
+        bod.innerHTML = content;
+
+        // bod.innerHTML = "<table class=\"table\">\n" +
+        //     "  <thead>\n" +
+        //     "    <tr>\n" +
+        //     "      <th scope=\"col\">#</th>\n" +
+        //     "      <th scope=\"col\">First</th>\n" +
+        //     "      <th scope=\"col\">Last</th>\n" +
+        //     "      <th scope=\"col\">Handle</th>\n" +
+        //     "    </tr>\n" +
+        //     "  </thead>\n" +
+        //     "  <tbody>\n" +
+        //     "    <tr>\n" +
+        //     "      <th scope=\"row\">1</th>\n" +
+        //     "      <td>Mark</td>\n" +
+        //     "      <td>Otto</td>\n" +
+        //     "      <td>@mdo</td>\n" +
+        //     "    </tr>\n" +
+        //     "    <tr>\n" +
+        //     "      <th scope=\"row\">2</th>\n" +
+        //     "      <td>Jacob</td>\n" +
+        //     "      <td>Thornton</td>\n" +
+        //     "      <td>@fat</td>\n" +
+        //     "    </tr>\n" +
+        //     "    <tr>\n" +
+        //     "      <th scope=\"row\">3</th>\n" +
+        //     "      <td>Larry</td>\n" +
+        //     "      <td>the Bird</td>\n" +
+        //     "      <td>@twitter</td>\n" +
+        //     "    </tr>\n" +
+        //     "  </tbody>\n" +
+        //     "</table>"
+        head.innerText = node.label;
+
+    }
+
+    function updateHighlight() {
+
+        // trigger update of highlighted objects in scene
+        highlightNodes.forEach(node => {
+            node.size = 50;
+        });
+        highlightLinks.forEach(link => {
+
+            console.log("Highligting link: " + link.type);
+
+            console.log("Updating the highlights");
+            Graph
+
+                .nodeColor(Graph.nodeColor())
+                .linkWidth(Graph.linkWidth())
+                .linkDirectionalParticles(Graph.linkDirectionalParticles());
+
+        });
+    }
+
+    function getColor(type) {
+
+        if (type == "Application") return '#FF8c00';
+        else if (type == "SourceModel") return '#2E8B57';
+        else if (type == "Declaration") return '#FFD700';
+        else if (type == "Import") return '#00BFFF';
+        else if (type == "Invocation") return '#CD5C5C';
+        else if (type == "Method") return '#BA55D3';
+        else if (type == "MethodParam") return '#778899';
+        else if (type == "Variable") return '#4169E1';
+        else if (type == "Build") return '#89ff65';
+        else if (type == "Artifact") return '#C71585';
+        else if (type == "Deployment") return '#b1c798';
+        else if (type == "Bundle") return '#ffb790';
+        else if (type == "RuntimeEnv") return '#7c3c29';
+        else if (type == "Host") return '#d6d2dc';
+        else return '#762dff'
+
+    }
+
+    function getSize(type) {
+
+        if (type == "Application") return 50;
+        else if (type == "SourceModel") return null;
+        else if (type == "Declaration") return null;
+        else if (type == "Import") return null;
+        else if (type == "Invocation") return null;
+        else if (type == "Method") return null;
+        else if (type == "MethodParam") return null;
+        else if (type == "Variable") return null;
+        else if (type == "Build") return null;
+        else if (type == "Artifact") return null;
+        else if (type == "Deployment") return null;
+        else if (type == "Bundle") return 25;
+        else if (type == "RuntimeEnv") return 30;
+        else if (type == "Host") return 30;
+        else return null;
+
+    }
+
+    function initLabels() {
+
+        // oink = document.getElementById("appCount");
+        // oink.innerText = appCount;
+        // applicationBtn = document.getElementById("applicationBtn");
+        // applicationBtn.style.backgroundColor = getColor("Application");
+        // applicationBtn.style.borderColor = getColor("Application");
+        //
+        // document.getElementById("decCount").innerText = decCount;
+        // declarationBtn = document.getElementById("declarationBtn");
+        // declarationBtn.style.backgroundColor = getColor("Declaration");
+        // declarationBtn.style.borderColor = getColor("Declaration");
+        //
+        // document.getElementById("sourceCount").innerText = sourceCount;
+        // sourceModelBtn = document.getElementById("sourceModelBtn");
+        // sourceModelBtn.style.backgroundColor = getColor("SourceModel");
+        // sourceModelBtn.style.borderColor = getColor("SourceModel");
+        //
+        // document.getElementById("varCount").innerText = varCount;
+        // variablelBtn = document.getElementById("variableBtn");
+        // variablelBtn.style.backgroundColor = getColor("Variable");
+        // variablelBtn.style.borderColor = getColor("Variable");
+        //
+        // document.getElementById("invoCount").innerText = invocationCount;
+        // invocationBtn = document.getElementById("invocationBtn");
+        // invocationBtn.style.backgroundColor = getColor("Invocation");
+        // invocationBtn.style.borderColor = getColor("Invocation");
+        //
+        // document.getElementById("importCount").innerText = importCount;
+        // importBtn = document.getElementById("importBtn");
+        // importBtn.style.backgroundColor = getColor("Import");
+        // importBtn.style.borderColor = getColor("Import");
+        //
+        // document.getElementById("methodCount").innerText = methodCount;
+        // methodBtn = document.getElementById("methodBtn");
+        // methodBtn.style.backgroundColor = getColor("Method");
+        // methodBtn.style.borderColor = getColor("Method");
+        //
+        // document.getElementById("parmCount").innerText = methodParmCount.toString();
+        // methodParmBtn = document.getElementById("methodParmBtn");
+        // methodParmBtn.style.backgroundColor = getColor("MethodParm");
+        // methodParmBtn.style.borderColor = getColor("MethodParm");
+        //
+        // document.getElementById("buildCount").innerText = buildCount.toString();
+        // buildBtn = document.getElementById("buildBtn");
+        // buildBtn.style.backgroundColor = getColor("Build");
+        // buildBtn.style.borderColor = getColor("Build");
+        //
+        // document.getElementById("deploymentCount").innerText = deploymentCount.toString();
+        // deploymentBtn = document.getElementById("deploymentBtn");
+        // deploymentBtn.style.backgroundColor = getColor("Deployment");
+        // deploymentBtn.style.borderColor = getColor("Deployment");
+        //
+        // document.getElementById("artifactCount").innerText = artifactCount.toString();
+        // artifacBtn = document.getElementById("artifactBtn");
+        // artifacBtn.style.backgroundColor = getColor("Artifact");
+        // artifacBtn.style.borderColor = getColor("Artifact");
+
+    }
+
+    function clearHighLightedNodes() {
+        highlightNodes.forEach((node => {
+            node.size = getSize(node.label);
+
+        }));
+    }
+
+    function borderIt(butt) {
+        console.log("Clicked");
+
+        console.log("The id is: " + butt.id);
+        butt.style.backgroundColor = '#d3d3d3';
+        if (butt.id == "noneBtn") {
+            Graph.dagMode(null);
+            dagMode = "noneBtn";
+
+        } else {
+            document.getElementById(dagMode).style.backgroundColor = '#FFFFFF';
+            dagMode = butt.id;
+            Graph.dagMode(butt.id);
+        }
+        // oink = document.getElementById(butt.id);
+        // oink.style.backgroundColor = '#2E8B57';
+
+    }
+
+    function removeNodeTypes(nodeType) {
+        let {nodes, links} = Graph.graphData();
+        nodes.forEach(node => {
+            if (node.label == nodeType) {
+                links = links.filter(l => l.source !== node && l.target !== node); // Remove links attached to node
+                nodes.splice(node.id, 1); // Remove node
+                nodes.forEach((n, idx) => {
+                    n.id = idx;
+                }); // Reset node ids to array index
+
+            }
+
+        });
+        Graph.graphData({nodes, links});
+    }
+
+    function resetCamera() {
+        // alert("Resetting Camera. Current is: " + Graph.cameraPosition(0,0,0));
+        // Graph.cameraPosition(
+        //     { x: 0, y: 0, z: 0 }, // new position
+        //     null, // lookAt ({ x, y, z })
+        //     3000  // ms transition duration
+        // );
+        // Graph.cameraPosition();
+        // Graph.zoomToFit(500);
+        var cam = Graph.camera();
+        cam.position.x = 0;
+        cam.position.y = 0;
+        // cam.position.z = 1770;
+        cam.rotation.x = -0;
+        cam.rotation.y = 0;
+        cam.rotation.z = -0;
+        cam.up.x = 0;
+        cam.up.y = 1;
+        cam.up.z = 0;
+        Graph.zoomToFit(500);
+    }
+
+</script>
+
+
+</body>

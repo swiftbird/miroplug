@@ -1,0 +1,319 @@
+call apoc.load.json("file://scan.json") yield value unwind value.declarations as declarations unwind value.namespace as imports return keys(declarations)
+
+call apoc.load.json("file://scan.json") yield value unwind value.declarations as declarations  return keys(declarations)
+
+call apoc.load.json("file://scan.json") yield value unwind value.declarations as data return data.name
+
+call apoc.load.json("file://scan.json") yield value unwind value.declarations as declarations unwind value.namespace as imports return imports
+
+call apoc.load.json("file://scan.json") yield value unwind value.declarations as declarations return value.imports
+
+call apoc.load.json("file://scan.json") yield value unwind value.declarations as declarations unwind declarations.fields as fields return value.imports, declarations.name, fields
+
+call apoc.load.json("file://scan.json") yield value unwind value.declarations as declarations unwind declarations.fields as fields return value.imports, declarations.name, fields
+
+call apoc.load.json("file://scan.json") yield value merge (appName:AppName {id: value.appName}) ON CREATE SET appName.title = value.runId
+
+
+call apoc.load.json("file://scan.json") yield value merge (application:Application {id: value.appName, runId: value.runId, fileName: value.name}) merge (file:File {fileName: value.name, location: value.location})
+
+call apoc.load.json("file://scan.json") yield value merge (application:Application {id: value.appName, appName: value.appName}) merge (file:File {id: value.name, fileName: value.name, location: value.location}) merge (run:Run {id: value.runId, runId: value.runId})
+
+call apoc.load.json("file://scan.json") yield value merge (application:Application {id: value.appName, appName: value.appName})
+merge (file:File {id: value.name, fileName: value.name, location: value.location})
+merge (application)-[consists:ConsistsOf {weight: 0.5}]->(file)
+merge (run:Run {id: value.runId, runId: value.runId}) ON CREATE SET run.scanDate = value.scanDate
+merge (run)-[:For]->(application)
+merge (namespace:NameSpace {id: value.namespace, nameSpace: value.namespace})
+with value
+unwind value.declarations as declaration
+merge (dn:Declaration {id: declaration.name, name: declaration.name})
+merge (dn)-[:IsPartOf]->(namespace)
+merge (application)-[contains:Contains]->(dn)
+merge (namespace)-[:Includes]->(declarationNode)
+foreach (import IN value.imports | merge (dn:Declaration {id: import, name: import}))
+merge (declarationNode)-[:Imports]->(dn)
+unwind declaration.fields as fields
+merge
+
+
+
+
+call apoc.load.json('file://SentinelByteCode.json') yield value
+unwind value.declarations as dec
+unwind dec.methods as method
+merge (declaration:Declaration {id: value.namespace + '.' + dec.name, declarationName: dec.name})
+merge (meth:Method {id: value.namespace + '.' + dec.name + '.' + method.name, methodName: method.name})
+merge (declaration)-[containsMethod:ContainsMethod]->(meth)
+merge (application:Application {id: value.appName, applicationName: value.appName})
+merge (file:File {id: value.name, fileName: value.name, location: value.location})
+merge (application)-[consists:ConsistsOf {weight: 0.5}]->(file)
+merge (application)-[contains:Contains]->(declaration)
+merge (run:Run {id: value.runId, runId: value.runId}) ON CREATE SET run.scanDate = value.scanDate
+merge (run)-[:For]->(application)
+merge (namespace:NameSpace {id: value.namespace, nameSpace: value.namespace})
+merge (declaration)-[:IsPartOf]->(namespace)
+merge (file)-[:Contains]->(declaration)
+merge (namespace)-[:Includes]->(declaration)
+WITH value.invocations AS invoke, declaration, meth, value
+  UNWIND
+   CASE
+      WHEN invoke = []
+         THEN [null]
+      ELSE invoke
+   END AS i
+unwind i as piggy
+merge (p:Invocation {id: piggy.name, invokeName: piggy.name})
+merge (declaration)-[:Invokes]->(p)
+merge (m:Method {id: split(piggy.methodSignature,'(')[0], methodName: piggy.name})
+merge (p)-[:Calls]->(m)
+
+call apoc.periodic.iterate("
+call apoc.load.json('file://SentinelByteCode.json') yield value
+","
+unwind value.declarations as dec
+unwind dec.methods as method
+ merge (declaration:Declaration {id: value.namespace + '.' + dec.name, declarationName: dec.name})
+ merge (meth:Method {id: value.namespace + '.' + dec.name + '.' + method.name, methodName: method.name})
+ merge (declaration)-[containsMethod:ContainsMethod]->(meth)
+ merge (application:Application {id: value.appName, applicationName: value.appName})
+ merge (file:File {id: value.name, fileName: value.name, location: value.location})
+ merge (application)-[consists:ConsistsOf {weight: 0.5}]->(file)
+ merge (application)-[contains:Contains]->(declaration)
+ merge (run:Run {id: value.runId, runId: value.runId}) ON CREATE SET run.scanDate = value.scanDate
+ merge (run)-[:For]->(application)
+ merge (namespace:NameSpace {id: value.namespace, nameSpace: value.namespace})
+ merge (declaration)-[:IsPartOf]->(namespace)
+ merge (file)-[:Contains]->(declaration)
+ merge (namespace)-[:Includes]->(declaration)
+WITH value.invocations AS invoke, declaration, meth, value
+  UNWIND
+   CASE
+      WHEN invoke = []
+         THEN [null]
+      ELSE invoke
+   END AS i
+unwind i as piggy
+merge (p:Invocation {id: piggy.name, invokeName: piggy.name})
+merge (declaration)-[:Invokes]->(p)
+merge (m:Method {id: split(piggy.methodSignature,'(')[0], methodName: piggy.name})
+merge (p)-[:Calls]->(m)
+", {batchSize: 10000, iterateList: true})
+
+
+MATCH (n:SourceModel {name: 'CoreServer.class'})-[r]-(b) RETURN n,r,b LIMIT 250
+
+match (n) detach delete(n)
+
+call apoc.export.csv.all("BigBurrito.csv", {})
+
+LOAD CSV WITH HEADERS FROM "file:///BigBurrito.csv" as csv return csv
+
+MATCH (n:SourceModel {}) where n.compilerVersion =~ 'JDK 1.1' RETURN n LIMIT 250
+
+MATCH (n)-[r]->(m) RETURN { id: id(n), label:head(labels(n)), caption:n.name} as source, {id: id(m), label:head(labels(m)), caption:m.name} as target, { type:type(r)} as rel  LIMIT 500
+
+MATCH (n)-[r]->(m) RETURN { id: id(n), label:head(labels(n)), caption:n.name} as source, {id: id(m), label:head(labels(m)), caption:m.name} as target, { type:type(r)} as rel  LIMIT $limit
+
+MATCH (n)-[r]->(m)
+RETURN { id: id(n), label:head(labels(n)), community:n.louvain,
+         caption:n.name, size:n.pagerank } as source,
+       { id: id(m), label:head(labels(m)), community:n.louvain,
+         caption:m.name, size:m.pagerank } as target,
+       { weight:r.weight, type:type(r),
+         community:case
+           when n.community < m.community then n.community
+           else m.community end} as rel
+LIMIT 1000
+
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar Sentinel FirstTest /Users/shaunanderson/Development/Sentinel5/source/sentinel5/sntl-server/target/classes > /Users/shaunanderson/Library/Application\ Support/com.Neo4j.Relate/Data/dbmss/dbms-ba72970a-e107-4d7a-8b6e-4ed76aa20648/import/SentinelByteCode.json
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar JMSReader FirstTest /Users/shaunanderson/Development/Sentinel5/source/sntl-jms-reader > /Users/shaunanderson/Library/Application\ Support/com.Neo4j.Relate/Data/dbmss/dbms-ba72970a-e107-4d7a-8b6e-4ed76aa20648/import/JMSReader.json
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar MySQLAdmin FirstTest /Users/shaunanderson/Development/MySqlAdmin > /Users/shaunanderson/Library/Application\ Support/com.Neo4j.Relate/Data/dbmss/dbms-ba72970a-e107-4d7a-8b6e-4ed76aa20648/import/MySQLAdmin.json
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar Loblaws FirstTest /Users/shaunanderson/Development/Loblaws > /Users/shaunanderson/Library/Application\ Support/com.Neo4j.Relate/Data/dbmss/dbms-ba72970a-e107-4d7a-8b6e-4ed76aa20648/import/Loblaws.json
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar DBC FirstTest /Users/shaunanderson/Development/DBC > /Users/shaunanderson/Library/Application\ Support/com.Neo4j.Relate/Data/dbmss/dbms-ba72970a-e107-4d7a-8b6e-4ed76aa20648/import/DBC.json
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar THDDAL FirstTest /Users/shaunanderson/Development/THD/daily-action-list-edge > /Users/shaunanderson/Library/Application\ Support/com.Neo4j.Relate/Data/dbmss/dbms-ba72970a-e107-4d7a-8b6e-4ed76aa20648/import/THDDAL.json
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar Stubby FirstTest /Users/shaunanderson/Development/StubHub > /Users/shaunanderson/Library/Application\ Support/com.Neo4j.Relate/Data/dbmss/dbms-ba72970a-e107-4d7a-8b6e-4ed76aa20648/import/StubHub.json
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar AccountsIntegration FirstTest /Users/shaunanderson/Development/WBRepo/samples/apptx-demos/AccountsIntegration/build/classes > /Users/shaunanderson/Library/Application\ Support/com.Neo4j.Relate/Data/dbmss/dbms-ba72970a-e107-4d7a-8b6e-4ed76aa20648/import/AccountsIntegration.json
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar L2QService FirstTest /Users/shaunanderson/Development/WBRepo/samples/apptx-demos/AccountsIntegration > /Users/shaunanderson/Library/Application\ Support/com.Neo4j.Relate/Data/dbmss/dbms-ba72970a-e107-4d7a-8b6e-4ed76aa20648/import/L2QService.json
+
+// All above without the redirect output
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar Sentinel FirstTest /Users/shaunanderson/Development/Sentinel5/source/sentinel5/sntl-server/target/classes
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar JMSReader FirstTest /Users/shaunanderson/Development/Sentinel5/source/sntl-jms-reader
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar MySQLAdmin FirstTest /Users/shaunanderson/Development/MySqlAdmin
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar Loblaws FirstTest /Users/shaunanderson/Development/Loblaws
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar DBC FirstTest /Users/shaunanderson/Development/DBC
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar THDDAL FirstTest /Users/shaunanderson/Development/THD/daily-action-list-edge
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar Stubby FirstTest /Users/shaunanderson/Development/StubHub
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar L2QService FirstTest /Users/shaunanderson/Development/WBRepo/samples/apptx-demos/L2QService
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar AccountsIntegration FirstTest /Users/shaunanderson/Development/WBRepo/samples/apptx-demos/AccountsIntegration/build/classes
+
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar Sentinel5 FirstRun /Users/shaunanderson/Development/Sentinel5/source/sentinel5/sntl-server/dist/sntl-server/lib http://neo4j:Inoke@supersloth:7474 false
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar MonitorWeb FirstRun /Users/shaunanderson/Development/Avaya/Sentinel/application/webapps http://neo4j:Inoke@supersloth:7474 false
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar SnarkyPig Oink /Users/shaunanderson/Development/snarky/pig http://neo4j:Inoke@supersloth:7474 false
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar ConfigServer2 March /Users/shaunanderson/Development/Avaya/ConfigServer2/ConfigEJBs http://neo4j:Inoke@supersloth:7474 false
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar ConfigServer2 March /Users/shaunanderson/Development/Avaya/ConfigServer2/ConfigServer http://neo4j:Inoke@supersloth:7474 false
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar ConfigServer2 March /Users/shaunanderson/Development/Avaya/ConfigServer2/WebConfig http://neo4j:Inoke@supersloth:7474 false
+
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar ASDQuoteServer March /Users/shaunanderson/Development/Avaya/ASD/ASDQuoteServer http://neo4j:Inoke@supersloth:7474 false
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar ASDQuoteServerB March /Users/shaunanderson/Development/Avaya/ASD/ASDQuoteServerB http://neo4j:Inoke@supersloth:7474 false
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar ConfigServer March /Users/shaunanderson/Development/Avaya/ASD/ConfigServer http://neo4j:Inoke@supersloth:7474 false
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar ControlApp March /Users/shaunanderson/Development/Avaya/ASD/ControlApp http://neo4j:Inoke@supersloth:7474 false
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar ModelSvr March /Users/shaunanderson/Development/Avaya/ASD/ModelSvr http://neo4j:Inoke@supersloth:7474 false
+java -jar target/BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar RequestSvr March /Users/shaunanderson/Development/Avaya/ASD/RequestSvr http://neo4j:Inoke@supersloth:7474 false
+
+java -jar -DAppName=SnarkyPig -DRunId=Oink -DSourceDir=/Users/shaunanderson/Development/snarky/pig -DNeoUri=http://neo4j:Inoke@supersloth:17474 -DProcessNestedJars=false -DOutputJSON=true -DCreateSample=true BytecodeIngestorLite-1.0-SNAPSHOT-shaded.jar > out.txt
+
+# Create constraints
+CREATE CONSTRAINT ON (a:Application) ASSERT a.id IS UNIQUE;
+CREATE CONSTRAINT ON (a:Artifact) ASSERT a.coordinate IS UNIQUE;
+CREATE CONSTRAINT ON (a:Build) ASSERT a.coordinates IS UNIQUE;
+CREATE CONSTRAINT ON (a:Bundle) ASSERT a.name IS UNIQUE;
+CREATE CONSTRAINT ON (a:Method) ASSERT a.methodSignature IS UNIQUE;
+CREATE CONSTRAINT ON (a:Variable) ASSERT a.name IS UNIQUE;
+CREATE CONSTRAINT ON (a:Declaration) ASSERT a.name IS UNIQUE;
+CREATE CONSTRAINT ON (a:Deployment) ASSERT a.name IS UNIQUE;
+CREATE CONSTRAINT ON (a:Host) ASSERT a.name IS UNIQUE;
+CREATE CONSTRAINT ON (a:Import) ASSERT a.name IS UNIQUE;
+CREATE CONSTRAINT ON (a:Invocation) ASSERT a.methodSignature IS UNIQUE;
+CREATE CONSTRAINT ON (a:MethodParm) ASSERT a.name IS UNIQUE;
+CREATE CONSTRAINT ON (a:RuntimeEnv) ASSERT a.name IS UNIQUE;
+#CREATE CONSTRAINT ON (a:SourceModel) ASSERT a.name IS UNIQUE;
+
+# Query Indexes -- not needed with the UNIQUE constraints
+
+create index source_index FOR (n:SourceModel) on (n.name)
+create index app_index FOR (n:Application) on (n.name)
+create index dec_index FOR (n:Declaration) on (n.name)
+create index var_index FOR (n:Variable) on (n.name)
+create index method_index FOR (n:Method) on (n.methodSignature)
+create index ms_index FOR (n:Invocation) on (n.methodSignature)
+create index artifact_index FOR (n:Artifact) on (n.coordinate)
+create index build_index FOR (n:Build) on (n.name)
+create index host_index FOR (n:Host) on (n.name)
+create index runtime_index FOR (n:RuntimeEnv) on (n.name)
+create index bundle_index FOR (n:Bundle) on (n.name)
+create index deployment_index FOR (n:Deployment) on (n.name)
+
+# Full text search indexing
+#CALL db.index.fulltext.createNodeIndex("SourceModelNamespace", ["SourceModel"], ["namespace"] {analyzer: "url_or_email", eventually_consistent: "true"})
+#CALL db.index.fulltext.createNodeIndex("SourceModelNamespace", ["SourceModel"], ["namespace"], {eventually_consistent: "true"})
+CALL db.index.fulltext.createNodeIndex("SourceModelSearch", ["SourceModel"], ["namespace", "name", "comment", "location"], {eventually_consistent: "true"})
+CALL db.index.fulltext.createNodeIndex("ApplicationSearch", ["Application"], ["name"], {eventually_consistent: "true"})
+CALL db.index.fulltext.createNodeIndex("InvocationSearch", ["Invocation"], ["name", "methodSignature"], {eventually_consistent: "true"})
+CALL db.index.fulltext.createNodeIndex("BuildSearch", ["Build"], ["coordinates", "name", "location"], {eventually_consistent: "true"})
+CALL db.index.fulltext.createNodeIndex("ImportSearch", ["Import"], ["name"], {eventually_consistent: "true"})
+CALL db.index.fulltext.createNodeIndex("ArtifactSearch", ["Artifact"], ["name","project","coordinate","version"], {eventually_consistent: "true"})
+CALL db.index.fulltext.createNodeIndex("DeclarationSearch", ["Declaration"], ["name"], {eventually_consistent: "true"})
+
+
+
+# Full text node queries
+https://graphaware.com/neo4j/2019/01/11/neo4j-full-text-search-deep-dive.html
+
+CALL db.index.fulltext.queryNodes("SourceModelSearch", "*sntl*") YIELD node, score
+RETURN node, score
+
+CALL db.index.fulltext.queryNodes("SourceModelNamespace", "*sntl*") YIELD node, score
+RETURN node, score
+
+CALL db.index.fulltext.queryNodes("SourceModelSearch", 'namespace:*sntl*') YIELD node, score
+RETURN node, score
+
+CALL db.index.fulltext.queryNodes("SourceModelSearch", 'name:producertestharness~') YIELD node, score
+RETURN node, score
+
+# Remove full text indexing
+CALL db.index.fulltext.drop("Invocation")
+
+match (a:Application)-[r:IS_CREATED_BY]->(b:Build) return a, b
+
+match p = (a:Application)-->(b)-->(c:Artifact) where a.name = 'ConfigServer2' return p
+
+MATCH p=()-[r]->() where toInteger(r.count) > 20 RETURN p LIMIT 25
+
+
+# Upserting application and updating the data
+MERGE (a:Application {name: "Charlie", runId: "CharlieRunId"})
+SET a = {name: "Charlie", runId: "CharlieRunId", scanDate: "Today", discoveredOnComponent: "./"}
+RETURN a
+
+# Make a link between application and SourceModel
+MATCH (a:Application {name: "Charlie"})
+MERGE (source:SourceModel {name: "parser.js"})
+MERGE (a)-[r:CONSISTS_OF]->(source)
+return a,source
+
+# SourceModel - [INVOKES]-> Invocation
+MATCH (s:SourceModel {name: "parser.js"})
+MERGE (i:Invocation {name: "close", methodSignature: "mymethod", lineNumber: 200})
+MERGE (s)-[ir:INVOKES]->(i)
+return i, s
+
+# Invocation -[CALLS] -> Method
+MATCH (i:Invocation {name: "close", methodSignature: "mymethod"})
+MERGE (m:Method {name: "close", methodSignature: "mymethod"})
+MERGE (i)-[ir:CALLS]->(m)
+return i, m
+
+# SourceModel -[CONTAINS]-> Delcaration
+MATCH (s:SourceModel {name: "parser.js"})
+MERGE (d:Declaration {name: "parser"})
+MERGE (s)-[c:CONTAINS]->(d)
+return d, s
+
+# SourceModel -[CONTAINS]-> Method
+MATCH (s:SourceModel {name: "parser.js"})
+MERGE (d:Method {name: "getInfo", methodSignature: "parser.getInfo"})
+MERGE (s)-[c:CONTAINS]->(d)
+return d, s
+
+# Method - [HAS_PARAMETER]-> Parameter
+MATCH (s:Method {methodSignature: "parser.js"})
+MERGE (d:Method {name: "getInfo", methodSignature: "parser.getInfo"})
+MERGE (s)-[c:CONTAINS]->(d)
+return d, s
+
+# SourceModel -[CONTAINS]-> Variable
+MATCH (s:SourceModel {name: "parser.js"})
+MERGE (d:Variable {name: "keepMonitoring", type: "boolean", initializer})
+MERGE (s)-[c:CONTAINS]->(d)
+return d, s
+
+# Artifact -[CONSISTS_OF]-> SourceModel
+MATCH (s:Artifact {name: "neo4j-driver", coordinate: "neo4j-driver:5.0.1"})
+MERGE (d:SourceModel {name: "parser.js"})
+MERGE (s)-[c:CONSISTS_OF]->(d)
+return d, s
+
+# Application -[DEPENDS_ON]-> Artifact
+MATCH (s:Application {name: "Charlie"})
+MERGE (d:Artifact {name: "neo4j-driver", coordinate: "neo4j-driver:5.0.1"})
+MERGE (s)-[c:CONSISTS_OF]->(d)
+return d, s
+
+# Build - [CREATES]-> Artifact
+MATCH (s:Build {name: "neo4j-driver", coordinate: "neo4j-driver:5.0.1"})
+MERGE (d:Artifact {name: "neo4j-driver", coordinate: "neo4j-driver:5.0.1"})
+MERGE (s)-[c:CREATES]->(d)
+return d, s
+
+# Application - [IS_CREATED_BY] - Build
+MERGE (s:Application {name: "Charlie"})
+MERGE (d:Build {name: "llama-driver", coordinate: "llama-driver:5.0.1"})
+MERGE (s)-[c:IS_CREATED_BY]->(d)
+return d, s
+
+# Boris Artifacts:
+MERGE (n:Service {name: "Customer"}) ON CREATE SET n.created = timestamp()
+
+MERGE (n:Topic {name: "Plan Deviated"}) ON CREATE SET n.created = timestamp()
+
+MERGE (n:External {name: "Plan Review UI"}) ON CREATE SET n.created = timestamp()
+
+MATCH
+  (a:Service {name: "Plan"}),
+  (b:Topic {name: "Lifestyle Determined"})
+MERGE (a)-[r:PUBLISHES]->(b)
+
+MATCH (n:Service)
+DETACH DELETE n

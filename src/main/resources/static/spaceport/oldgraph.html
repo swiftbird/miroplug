@@ -1,0 +1,78 @@
+<head>
+    <style> body { margin: 0; } </style>
+
+    <script src="//unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/neo4j-driver"></script>
+    <!--<script src="../../dist/3d-force-graph.js"></script>-->
+</head>
+
+<body>
+<div id="3d-graph"></div>
+
+<script>
+    // const driver = neo4j.driver("bolt://demo.neo4jlabs.com", neo4j.auth.basic("gameofthrones", "gameofthrones"),{encrypted: true});
+    const driver = neo4j.driver("bolt://localhost:11003", neo4j.auth.basic("neo4j", "Gand$alf1"),{encrypted: false});
+    // const session = driver.session({database:"gameofthrones"});
+    const session = driver.session();
+    const start = new Date()
+    session
+         .run('MATCH (n)-[:Invokes]->(m) RETURN id(n) as source, id(m) as target LIMIT $limit', {limit: neo4j.int(5000)})
+        // .run('MATCH (n)-[r]->(m) RETURN { id: id(n), label:head(labels(n)), caption:n.name} as source, {id: id(m), label:head(labels(m)), caption:m.name} as target, { type:type(r)} as rel  LIMIT $limit', {limit: neo4j.int(5000)})
+        .then(function (result) {
+            const links = result.records.map(r => { return {source:r.get('source').toNumber(), target:r.get('target').toNumber()}});
+            session.close();
+            console.log(links.length+" links loaded in "+(new Date()-start)+" ms.")
+            const ids = new Set()
+            links.forEach(l => {ids.add(l.source);ids.add(l.target);});
+            const gData = { nodes: Array.from(ids).map(id => {return {id}}), links: links}
+            const Graph = ForceGraph3D()(document.getElementById('3d-graph')).graphData(gData);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+</script>
+
+<script>
+
+    const driver = neo4j.driver("bolt://localhost:11003", neo4j.auth.basic("neo4j", "Gand$alf1"),{encrypted: false});
+
+    const session = driver.session();
+    const start = new Date()
+    session
+        .run('MATCH (n)-[r]->(m) RETURN { id: id(n), label:head(labels(n)), caption:n.name} as source, {id: id(m), label:head(labels(m)), caption:m.name} as target, { type:type(r)} as rel  LIMIT $limit', {limit: neo4j.int(5000)})
+        .then(function (result) {
+            const nodes = {}
+            const links = result.records.map(r => {
+                var source = r.get('source');source.id = source.id.toNumber();
+                nodes[source.id] = source;
+                var target = r.get('target');target.id = target.id.toNumber();
+                nodes[target.id] = target;
+                var rel = r.get('rel');
+                return Object.assign({source:source.id,target:target.id}, rel);
+            });
+            const nodes = {}
+            const links = result.records.map(r => {
+                var source = r.get('source');source.id = source.id.toNumber();
+                nodes[source.id] = source;
+                var target = r.get('target');target.id = target.id.toNumber();
+                nodes[target.id] = target;
+                var rel = r.get('rel');
+                return Object.assign({source:source.id,target:target.id}, rel);
+            });
+            session.close();
+            console.log(links.length+" links loaded in "+(new Date()-start)+" ms.")
+            const gData = { nodes: Object.values(nodes), links: links}
+            const Graph = ForceGraph3D()(elem)
+                .graphData(gData)
+                .nodeAutoColorBy('label')
+                .nodeVal('size')
+                .linkAutoColorBy('type')
+                .linkWidth('weight')
+                .nodeLabel(node => `${node.label}: ${node.caption}`)
+                .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+</script>
+</body>

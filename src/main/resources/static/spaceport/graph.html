@@ -1,0 +1,223 @@
+<head>
+    <style> body {
+            margin: 0;
+        } </style>
+
+    <script src="//unpkg.com/3d-force-graph"></script>
+    <script src="https://unpkg.com/neo4j-driver"></script>
+    <script src="//unpkg.com/three"></script>
+    <script src="//unpkg.com/three-spritetext"></script>
+    <!--<script src="../../dist/3d-force-graph.js"></script>-->
+</head>
+
+<body>
+<div id="3d-graph"></div>
+
+
+<script>
+
+    const driver = neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "Inoke"), {encrypted: false});
+    const elem = document.getElementById('3d-graph');
+    const session = driver.session();
+    const start = new Date()
+    session
+        .run('MATCH (n)-[r]->(m) RETURN { id: id(n), label:head(labels(n)), ' +
+            'caption:n.name} as source, {id: id(m), label:head(labels(m)), caption:m.name} as target, ' +
+            '{ type:type(r)} as rel  LIMIT $limit', {limit: neo4j.int(5000)})
+        .then(function (result) {
+            const nodes = {}
+            const links = result.records.map(r => {
+                var source = r.get('source');
+                source.id = source.id.toNumber();
+                source.pig = 'donkey';
+                source.neighbors = [];
+                source.links = [];
+                nodes[source.id] = source;
+
+                // console.log(source.label);
+                if (source.label == 'Application') {
+                    console.log("I have an application");
+                    source.size = 50;
+                }
+                if (source.label == 'Declaration') {
+                    console.log("I have a Declaration");
+                    // source.size = 25;
+                }
+                if (source.label == 'SourceModel') {
+                    console.log("I have a SourceModel");
+                    // source.size = 30;
+                }
+                var target = r.get('target');
+                target.id = target.id.toNumber();
+                nodes[target.id] = target;
+                target.pig = 'llama';
+                target.neighbors = [];
+                target.links = [];
+
+                var rel = r.get('rel');
+                source.links.push(r);
+                target.links.push(r);
+                source.neighbors.push(target);
+                target.neighbors.push(source);
+
+                return Object.assign({source: source.id, target: target.id}, rel);
+            });
+
+            // session.close();
+            console.log(links.length + " links loaded in " + (new Date() - start) + " ms.")
+            const gData = {nodes: Object.values(nodes), links: links}
+
+            // cross-link node objects
+            gData.links.forEach(link => {
+                const a = gData.nodes[link.source];
+                const b = gData.nodes[link.target];
+                // It may be an incomplete graph because of limits
+                if (a != null) {
+
+                    !a.neighbors && (a.neighbors = []);
+                    // !b.neighbors && (b.neighbors = []);
+                    // a.neighbors.push(b);
+                    // b.neighbors.push(a);
+
+                    !a.links && (a.links = []);
+                    // !b.links && (b.links = []);
+                    a.links.push(link);
+                    // b.links.push(link);
+                }
+                if (b != null) {
+
+                    // !a.neighbors && (a.neighbors = []);
+                    !b.neighbors && (b.neighbors = []);
+                    // a.neighbors.push(b);
+                    // b.neighbors.push(a);
+
+                    // !a.links && (a.links = []);
+                    !b.links && (b.links = []);
+                    // a.links.push(link);
+                    b.links.push(link);
+                }
+            });
+            console.log("Crosslinked I thinked");
+
+            const highlightNodes = new Set();
+            const highlightLinks = new Set();
+            let hoverNode = null;
+
+            const Graph = ForceGraph3D()(elem)
+                .graphData(gData)
+                .nodeAutoColorBy('label')
+
+                // .nodeColor(node => highlightNodes.has(node) ? node === hoverNode ? 'rgb(255,0,0,1)' : 'rgba(255,160,0,0.8)' : 'rgba(0,255,255,0.6)')
+                .linkWidth(link => highlightLinks.has(link) ? 4 : 1)
+                .linkDirectionalParticles(link => highlightLinks.has(link) ? 4 : 0)
+                .linkDirectionalParticleWidth(4)
+                // Link Text -- This takes a lot of horse power
+                //                 .linkThreeObjectExtend(true)
+                //                 .linkThreeObject(link => {
+                //                     // extend link with text sprite
+                //                     const sprite = new SpriteText(`${link.type}`);
+                //                     sprite.color = 'lightgrey';
+                //                     sprite.textHeight = 1.5;
+                //                     return sprite;
+                //                 })
+                //                 .linkPositionUpdate((sprite, { start, end }) => {
+                //                     const middlePos = Object.assign(...['x', 'y', 'z'].map(c => ({
+                //                         [c]: start[c] + (end[c] - start[c]) / 2 // calc middle point
+                //                     })));
+                //
+                //                     // Position sprite
+                //                     Object.assign(sprite.position, middlePos);
+                //                 })
+
+                .onNodeHover(node => {
+
+                    // no state change
+                    if ((!node && !highlightNodes.size) || (node && hoverNode === node)) return;
+
+                    highlightNodes.clear();
+                    highlightLinks.clear();
+                    if (node) {
+                        console.log("I am hovering on a node " + node.caption);
+                        highlightNodes.add(node);
+                        node.neighbors.forEach(neighbor => highlightNodes.add(neighbor));
+                        node.links.forEach(link => highlightLinks.add(link));
+                    }
+
+                    hoverNode = node || null;
+
+                    updateHighlight();
+                })
+
+                .nodeVal('size')
+                .onNodeClick(node => {
+                    // Aim at node from outside it
+                    const distance = 40;
+                    const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+
+                    Graph.cameraPosition(
+                        {x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio}, // new position
+                        node, // lookAt ({ x, y, z })
+                        3000  // ms transition duration
+                    );
+
+                    // removeNode(node);
+
+                })
+                .onNodeDragEnd(node => {
+                    node.fx = node.x;
+                    node.fy = node.y;
+                    node.fz = node.z;
+                })
+                .linkAutoColorBy('type')
+                // .linkWidth('weight')
+                // .linkWidth(10)
+                .linkDirectionalArrowLength(3.5)
+                .linkDirectionalArrowRelPos(1)
+                // .linkCurvature(0.25)
+                // .nodeLabel(node => `${node.label}: ${node.caption}: ${node.pig}`)
+                .nodeLabel(node => `${node.label}: ${node.caption}: Neighbors: ${node.neighbors.length}: Links: ${node.links.length}`)
+
+                // .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
+
+                .onLinkHover(link => {
+                    highlightNodes.clear();
+                    highlightLinks.clear();
+
+                    if (link) {
+                        highlightLinks.add(link);
+                        highlightNodes.add(link.source);
+                        highlightNodes.add(link.target);
+
+                    }
+
+                    updateHighlight();
+                });
+
+            // Spread nodes a little wider
+            Graph.d3Force('charge').strength(-120);
+
+            function updateHighlight() {
+                // trigger update of highlighted objects in scene
+                Graph
+                    .nodeColor(Graph.nodeColor())
+                    .linkWidth(Graph.linkWidth())
+                    .linkDirectionalParticles(Graph.linkDirectionalParticles());
+            }
+
+            function removeNode(node) {
+                let {nodes, links} = Graph.graphData();
+                links = links.filter(l => l.source !== node && l.target !== node); // Remove links attached to node
+                nodes.splice(node.id, 1); // Remove node
+                nodes.forEach((n, idx) => {
+                    n.id = idx;
+                }); // Reset node ids to array index
+                Graph.graphData({nodes, links});
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+
+</script>
+</body>
