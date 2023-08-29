@@ -730,40 +730,40 @@
 
     function getColor(type) {
 
-        if (type == "Application") return '#FF8c00';
-        else if (type == "SourceModel") return '#2E8B57';
-        else if (type == "Declaration") return '#FFD700';
-        else if (type == "Import") return '#00BFFF';
-        else if (type == "Invocation") return '#CD5C5C';
-        else if (type == "Method") return '#BA55D3';
-        else if (type == "MethodParam") return '#778899';
-        else if (type == "Variable") return '#4169E1';
-        else if (type == "Build") return '#89ff65';
-        else if (type == "Artifact") return '#C71585';
-        else if (type == "Deployment") return '#b1c798';
-        else if (type == "Bundle") return '#ffb790';
-        else if (type == "RuntimeEnv") return '#7c3c29';
-        else if (type == "Host") return '#d6d2dc';
+        if (type === "Application") return '#FF8c00';
+        else if (type === "SourceModel") return '#2E8B57';
+        else if (type === "Declaration") return '#FFD700';
+        else if (type === "Import") return '#00BFFF';
+        else if (type === "Invocation") return '#CD5C5C';
+        else if (type === "Method") return '#BA55D3';
+        else if (type === "MethodParam") return '#778899';
+        else if (type === "Variable") return '#4169E1';
+        else if (type === "Build") return '#89ff65';
+        else if (type === "Artifact") return '#C71585';
+        else if (type === "Deployment") return '#b1c798';
+        else if (type === "Bundle") return '#ffb790';
+        else if (type === "RuntimeEnv") return '#7c3c29';
+        else if (type === "Host") return '#d6d2dc';
         else return '#762dff'
 
     }
 
     function getSize(type) {
 
-        if (type == "Application") return 50;
-        else if (type == "SourceModel") return null;
-        else if (type == "Declaration") return null;
-        else if (type == "Import") return null;
-        else if (type == "Invocation") return null;
-        else if (type == "Method") return null;
-        else if (type == "MethodParam") return null;
-        else if (type == "Variable") return null;
-        else if (type == "Build") return null;
-        else if (type == "Artifact") return null;
-        else if (type == "Deployment") return null;
-        else if (type == "Bundle") return 25;
-        else if (type == "RuntimeEnv") return 30;
-        else if (type == "Host") return 30;
+        if (type === "Application") return 50;
+        else if (type === "SourceModel") return null;
+        else if (type === "Declaration") return null;
+        else if (type === "Import") return null;
+        else if (type === "Invocation") return null;
+        else if (type === "Method") return null;
+        else if (type === "MethodParam") return null;
+        else if (type === "Variable") return null;
+        else if (type === "Build") return null;
+        else if (type === "Artifact") return null;
+        else if (type === "Deployment") return null;
+        else if (type === "Bundle") return 25;
+        else if (type === "RuntimeEnv") return 30;
+        else if (type === "Host") return 30;
         else return null;
 
     }

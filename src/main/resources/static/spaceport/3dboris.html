@@ -9,16 +9,16 @@
 
 <body>
 <div id="3d-graph"></div>
+<script type="importmap">{ "imports": { "three": "https://unpkg.com/three/build/three.module.js" }}</script>
 
 <script src="https://unpkg.com/d3-force-3d"></script>
 <script src="https://unpkg.com/d3-octree"></script>
 
 <script src="https://unpkg.com/three"></script>
 <script src="https://unpkg.com/three-spritetext"></script>
-
 <script src="https://unpkg.com/dat.gui"></script>
 <script type="module">
-
+    import {CSS2DRenderer, CSS2DObject} from 'https://unpkg.com/three/examples/jsm/renderers/CSS2DRenderer.js';
     // import { UnrealBloomPass } from '//unpkg.com/three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
     // Random tree
@@ -64,13 +64,43 @@
     let runtimeCount = 0;
 
     // Controls
-    const controls = { 'DAG Orientation': null};
-    const gui = new dat.GUI();
-    gui.add(controls, 'DAG Orientation', ['lr', 'td', 'zout', 'radialout', null])
-        .onChange(orientation => Graph && Graph.dagMode(orientation));
+    const controls = {'DAG Orientation': null};
+    const diagram = {'Diagram': null};
 
-    // This is the Graph definition and all the cool properties
-    const Graph = ForceGraph3D()(elem)
+    const layers = {
+
+        'Toggle Images': function () {
+
+            Graph.camera().layers.toggle( 2 );
+
+        },
+        'Toggle Labels': function () {
+
+            Graph.camera().layers.toggle( 1 );
+
+        },
+        'Enable All': function () {
+
+            Graph.camera().layers.enableAll();
+
+        },
+
+        'Disable All': function () {
+
+            Graph.camera().layers.disableAll();
+
+        }
+
+    };
+
+    initGui();
+    // const gui = new dat.GUI();
+    // gui.add(controls, 'DAG Orientation', ['lr', 'td', 'zout', 'radialout', null])
+    //     .onChange(orientation => Graph && Graph.dagMode(orientation));
+    // // import { CSS2DRenderer, CSS2DObject } from 'https://unpkg.com/three/examples/jsm/renderers/CSS2DRenderer.js';
+    // gui.add(diagram, 'Diagram', ['all', 'PaDonkaDonkey', 'GooberBerry'], null).onChange(donk => console.log("I made a change: " + donk));
+    // // This is the Graph definition and all the cool properties
+    const Graph = ForceGraph3D({extraRenderers: [new CSS2DRenderer()]})(elem)
         // .enableNodeDrag(true)
         // .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
         .dagMode(null)
@@ -78,7 +108,7 @@
         .onDagError(() => false)
         .d3Force('collision', d3.forceCollide(node => Math.cbrt(node.size) * NODE_REL_SIZE))
         .d3VelocityDecay(0.3)
-        .backgroundColor('#FFFFFF')
+        .backgroundColor('#ecebeb')
 
         // .showNavInfo(true)
 
@@ -116,25 +146,56 @@
 
         })
         .nodeLabel(node => `${node.label}: ${node.caption}`)
-// This is creating text nodes
-//         .nodeThreeObject(node => {
-//             const sprite = new SpriteText(node.caption);
-//             sprite.material.depthWrite = false; // make sprite background transparent
-//             // sprite.color = node.color;
-//             sprite.color = getColor(node.label)
-//             sprite.textHeight = 2;
-//             return sprite;
-//         })
+        // This is creating text nodes
+        //         .nodeThreeObject(node => {
+        //             const sprite = new SpriteText(node.caption);
+        //             sprite.material.depthWrite = false; // make sprite background transparent
+        //             // sprite.color = node.color;
+        //             sprite.color = getColor(node.label)
+        //             sprite.textHeight = 2;
+        //             return sprite;
+        //         })
         .nodeThreeObject(node => {
             // const imgTexture = new THREE.TextureLoader().load(node => `../images/${node.label}_sprite.png`);
             console.log(node);
             const imgTexture = new THREE.TextureLoader().load(`../images/${node.label}_sprite.png`);
             imgTexture.colorSpace = THREE.SRGBColorSpace;
-            const material = new THREE.SpriteMaterial({ map: imgTexture });
+            const material = new THREE.SpriteMaterial({map: imgTexture});
             const sprite = new THREE.Sprite(material);
+
+            // const label = new SpriteText(`${node.caption}`);
+            // label.material.depthWrite = false;
+            // label.color = "#e12c2c";
+            // // label.textHeight = 8;
+            // label.scale.set(1, .8, 10);
+            // sprite.add(label)
+            const nodeEl = document.createElement('div');
+            nodeEl.innerHTML = (`${node.caption}`);
+            // nodeEl.textContent = (`${node.caption}`);
+            // nodeEl.style.color = node.color;
+            // nodeEl.style.color = "#e12c2c";
+            nodeEl.style.color = getColor(`${node.label}`);
+
+
+            // nodeEl.className = 'node-label';
+            const label = new CSS2DObject(nodeEl);
+            label.position.set(0.5, 0.5);
+label.layers.set(1);
+// label.layers.enableAll();
+            sprite.add(label)
+sprite.layers.set(2);
+sprite.layers.enableAll();
             sprite.scale.set(12, 12);
             return sprite;
         })
+        // .nodeThreeObject(node => {
+        //     const nodeEl = document.createElement('div');
+        //     nodeEl.textContent = node.id;
+        //     nodeEl.style.color = node.color;
+        //     nodeEl.className = node.label;
+        //     return new CSS2DObject(nodeEl);
+        // })
+        // .nodeThreeObjectExtend(true)
 
         .linkLabel(link => `${link.type}`)
         // .linkAutoColorBy('type')
@@ -165,6 +226,13 @@
             }
 
             updateHighlight();
+            // Adding Grid
+            // This works but the location is in the middle of the graph
+            // const grid = new THREE.GridHelper( 200, 20, 0x000000, 0x000000 );
+            // grid.material.opacity = 0.3;
+            // grid.material.transparent = true;
+            // Graph.scene().add( grid );
+
         });
 
 
@@ -217,7 +285,7 @@
 
             const ggData = {nodes: Object.values(nodes), links: links};
             crossLink(ggData);
-             initIt(ggData);
+            initIt(ggData);
             Graph.graphData(ggData);
             const bloomPass = new UnrealBloomPass();
             bloomPass.strength = 3;
@@ -228,17 +296,17 @@
 
         });
     }
+
     function getNodeInListById(gData, id) {
         let location = 0;
         let node = null;
         gData.nodes.forEach(currentNode => {
-            if (currentNode.id == id) {
-                console.log("Found it at: " + location);
-                node = location;
+                if (currentNode.id == id) {
+                    console.log("Found it at: " + location);
+                    node = location;
+                }
+                location++;
             }
-                location ++;
-        }
-
         );
         return node;
     }
@@ -575,6 +643,7 @@
         else if (type == "Topic") return "#f12309";
         else if (type == "External") return "#63ec1f";
         else if (type == "AntiCorruptionLayer") return "#ea701a";
+        else if (type == "Diagram") return "#850de8";
         else return '#762dff'
 
     }
@@ -585,8 +654,9 @@
 
         else if (type == "SUBSCRIBE") return "#f12309";
         else if (type == "PUBLISH") return "#f12309";
+        else if (type == "CONTAINS") return "#850de8";
 
-        else return '#21ea1a'
+        else return "#c0bec2";
 
     }
 
@@ -736,6 +806,27 @@
         cam.up.y = 1;
         cam.up.z = 0;
         Graph.zoomToFit(500);
+    }
+
+    function initGui() {
+        const gui = new dat.GUI();
+        gui.add(controls, 'DAG Orientation', ['lr', 'td', 'zout', 'radialout', null])
+            .onChange(orientation => Graph && Graph.dagMode(orientation));
+        // import { CSS2DRenderer, CSS2DObject } from 'https://unpkg.com/three/examples/jsm/renderers/CSS2DRenderer.js';
+        gui.add(diagram, 'Diagram', ['all', 'PaDonkaDonkey', 'GooberBerry'], null).onChange(donk => console.log("I made a change: " + donk));
+
+
+        // gui = new GUI();
+
+        // gui.title( 'Camera Layers' );
+
+        gui.add( layers, 'Toggle Images' );
+        gui.add( layers, 'Toggle Labels' );
+        gui.add( layers, 'Enable All' );
+        gui.add( layers, 'Disable All' );
+
+        gui.open();
+
     }
 
 

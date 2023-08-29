@@ -63,6 +63,30 @@ async function createBorisGraph(widget) {
     // miro.board.viewport.zoomTo(stick);
 }
 
+async function createBorisGraphByName(borisName) {
+
+    const widgetJson = JSON.stringify(await miro.board.getSelection())
+    console.log("Sending to save graph: " + borisName);
+    console.log(widgetJson)
+
+    const response = await fetch(`spaceport/borismodels/${borisName}`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: widgetJson.toString()
+    })
+    let json = await response.json();
+
+
+    // drawit(json);
+    console.log("I got a response: " + JSON.stringify(json))
+    // const stick = await miro.board.createStickyNote(json)
+    // console.log(stick)
+    // miro.board.viewport.zoomTo(stick);
+}
+
 async function sendWidget(widget) {
     const widgetJson = JSON.stringify(widget)
     console.log("Sending: ")
@@ -321,7 +345,6 @@ async function init() {
         // });
     });
 
-
     // const todo = await miro.board.createTag({
     //     title: 'todo-cuz-i-wanna',
     //     color: 'yellow'
@@ -391,7 +414,13 @@ document.addEventListener("DOMContentLoaded", function () {
     if (el) {
         el.addEventListener("click", async function () {
             console.log("Save Boris!");
-            createBorisGraph(await miro.board.getSelection());
+            await miro.board.ui.openModal({
+                url: 'saveBoris.html',
+                width: 500,
+                height: 500,
+                fullscreen: false,
+            });
+            // createBorisGraph(await miro.board.getSelection());
             // await sendWidget(await miro.board.getSelection())
             // await miro.board.ui.alert("Boris Saved!");
             // Create a notification message to display on the board UI.

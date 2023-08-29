@@ -30,7 +30,8 @@ public class GraphService implements AutoCloseable {
 //        driver = GraphDatabase.driver(config.getNeoUri(), AuthTokens.basic(config.getUser(), config.getPassword()));
 
 
-        String query = "MATCH (n)-[r]->(m) RETURN n as source, r as rel, m as target limit 5000 ";
+        String query = "MATCH (n)-[r]->(m) WHERE NOT n:Diagram RETURN n as source, r as rel, m as target LIMIT 5000";
+//        String query = "MATCH (n)-[r]->(m)  RETURN n as source, r as rel, m as target LIMIT 5000";
 
         String uri = "bolt://localhost:7687";
         String user = "inoke";
@@ -60,35 +61,61 @@ public class GraphService implements AutoCloseable {
         driver.close();
     }
 
-    private String createServiceQuery(JSONObject currentWidget) {
+    private String createServiceQuery(JSONObject currentWidget, String borisName) {
         JSONObject style = (JSONObject) currentWidget.get("style");
         String color = (String) style.get("fillColor");
         System.out.println("I have a style: " + style.toJSONString());
         System.out.println(("Color is: " + color));
+        System.out.println("Boris name is: " + borisName);
         String serviceQuery = null;
         switch (color) {
             case "blue":
-                serviceQuery = "MERGE (n:Service {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp()";
+                serviceQuery = "MERGE (n:Service {name: \"" + currentWidget.get("content") + "\"})  ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"\n" +
+                        "MERGE (d:Diagram {name: \""+borisName+"\"}) ON CREATE SET d.created = timestamp(), d.type=\"Boris\"\n" +
+                        "MERGE (d)-[r:CONTAINS]->(n)";
+//                serviceQuery = "MERGE (n:Service {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"";
                 currentWidget.put("nodeType", "Service");
                 break;
             case "light_blue":
-                serviceQuery = "MERGE (n:Service {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp()";
+                serviceQuery = "MERGE (n:Service {name: \"" + currentWidget.get("content") + "\"})  ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"\n" +
+                        "MERGE (d:Diagram {name: \""+borisName+"\"}) ON CREATE SET d.created = timestamp(), d.type=\"Boris\"\n" +
+                        "MERGE (d)-[r:CONTAINS]->(n)";
+//                serviceQuery = "MERGE (n:Service {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"";
                 currentWidget.put("nodeType", "Service");
                 break;
             case "red":
-                serviceQuery = "MERGE (n:Topic {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp()";
+                serviceQuery = "MERGE (n:Topic {name: \"" + currentWidget.get("content") + "\"})  ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"\n" +
+                        "MERGE (d:Diagram {name: \""+borisName+"\"}) ON CREATE SET d.created = timestamp(), d.type=\"Boris\"\n" +
+                        "MERGE (d)-[r:CONTAINS]->(n)";
+//                serviceQuery = "MERGE (n:Topic {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"";
+                currentWidget.put("nodeType", "Topic");
+                break;
+            case "pink":
+                serviceQuery = "MERGE (n:Topic {name: \"" + currentWidget.get("content") + "\"})  ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"\n" +
+                        "MERGE (d:Diagram {name: \""+borisName+"\"}) ON CREATE SET d.created = timestamp(), d.type=\"Boris\"\n" +
+                        "MERGE (d)-[r:CONTAINS]->(n)";
+//                serviceQuery = "MERGE (n:Topic {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"";
                 currentWidget.put("nodeType", "Topic");
                 break;
             case "light_green":
-                serviceQuery = "MERGE (n:External {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp()";
+                serviceQuery = "MERGE (n:External {name: \"" + currentWidget.get("content") + "\"})  ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"\n" +
+                        "MERGE (d:Diagram {name: \""+borisName+"\"}) ON CREATE SET d.created = timestamp(), d.type=\"Boris\"\n" +
+                        "MERGE (d)-[r:CONTAINS]->(n)";
+//                serviceQuery = "MERGE (n:External {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"";
                 currentWidget.put("nodeType", "External");
                 break;
             case "green":
-                serviceQuery = "MERGE (n:External {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp()";
+                serviceQuery = "MERGE (n:External {name: \"" + currentWidget.get("content") + "\"})  ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"\n" +
+                        "MERGE (d:Diagram {name: \""+borisName+"\"}) ON CREATE SET d.created = timestamp(), d.type=\"Boris\"\n" +
+                        "MERGE (d)-[r:CONTAINS]->(n)";
+//                serviceQuery = "MERGE (n:External {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"";
                 currentWidget.put("nodeType", "External");
                 break;
             case "orange":
-                serviceQuery = "MERGE (n:AntiCorruptionLayer {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp()";
+                serviceQuery = "MERGE (n:AntiCorruptionLayer {name: \"" + currentWidget.get("content") + "\"})  ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"\n" +
+                        "MERGE (d:Diagram {name: \""+borisName+"\"}) ON CREATE SET d.created = timestamp(), d.type=\"Boris\"\n" +
+                        "MERGE (d)-[r:CONTAINS]->(n)";
+//                serviceQuery = "MERGE (n:AntiCorruptionLayer {name: \"" + currentWidget.get("content") + "\"}) ON CREATE SET n.created = timestamp(), n.boris = \"" + borisName + "\"";
                 currentWidget.put("nodeType", "AntiCorruptionLayer");
                 break;
             default:
@@ -98,8 +125,8 @@ public class GraphService implements AutoCloseable {
         return serviceQuery;
     }
 
-    public String saveBoris(String graph) {
-        System.out.println("Saving Boris: ");
+    public String saveBoris(String graph, String borisName) {
+        System.out.println("Saving Boris " + borisName + ": ");
         String result = "";
         // Converting  the graph to a different format that python understands
         System.out.println("The graph looks like this: " + graph);
@@ -119,7 +146,7 @@ public class GraphService implements AutoCloseable {
                 if (currentWidget.get("type").equals("sticky_note")) {
                     System.out.println("Saving a sticky");
                     nodes.add(currentWidget);
-                    String serviceQuery = createServiceQuery(currentWidget);
+                    String serviceQuery = createServiceQuery(currentWidget, borisName);
                     if (serviceQuery != null) {
                         String uri = "bolt://localhost:7687";
                         String user = "inoke";

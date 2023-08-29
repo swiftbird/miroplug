@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-indigo.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://miro.com/app/static/sdk/v2/miro.js"></script>
+    <script src="js/swift.js"></script>
+    <style>
+        .demo-button {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            cursor: pointer;
+            background-color: #3b71ca;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            line-height: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+        }
+
+        .demo-button::after {
+            content: "";
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.6);
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .demo-button.mdl-ripple.is-animating::after {
+            opacity: 1;
+            transition-duration: 0.8s;
+        }
+
+        .mdl-textfield {
+            width: 100%;
+        }
+    </style>
+    <script>
+        function createBorisGraph(selection) {
+            // Replace this with your actual implementation of the createBorisGraph function
+            console.log("Creating Boris Graph:", selection);
+        }
+    </script>
+</head>
+<body>
+<div class="mdl-textfield mdl-js-textfield">
+    <input class="mdl-textfield__input" type="text" id="boris-name" />
+    <label class="mdl-textfield__label" for="boris-name">Boris Name</label>
+    <span class="mdl-textfield__error">Please enter a name</span>
+</div>
+<button class="demo-button mdl-js-button mdl-js-ripple-effect" onclick="handleButtonClick()">
+    Save Boris!
+</button>
+
+<script>
+    async function handleButtonClick() {
+        var inputElement = document.getElementById("boris-name");
+        var name = inputElement.value;
+        console.log("Gonna save boris: " + name);
+        await createBorisGraphByName(name);
+        // await miro.board.ui.closeModal();
+    }
+</script>
+
+
+</body>
+</html>
